@@ -1,0 +1,413 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4CD75365-8196-4CE9-8FEB-9CBB38BCC4FF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>IsoViewer</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ps.Iso.Viewer</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestCertificateThumbprint>B97D92FD1922ED670D4062564248BC89A887F250</ManifestCertificateThumbprint>
+    <ManifestKeyFile>IsoViewer_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>\\Master\sys\EXCHANGE\PAVEL\IsoViewer\publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
+    <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
+    <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
+    <SccProvider>Mercurial Source Control Package</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PsIso, Version=1.0.2638.1737, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\shared\DotNET\PsIso\bin\Release\PsIso.dll</HintPath>
+    </Reference>
+    <Reference Include="PsWinControls, Version=1.0.3547.28779, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ref\PsWinControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.XML">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="comments\BUGS.txt" />
+    <Content Include="comments\ChangeLog.txt" />
+    <Content Include="comments\NOTES.txt" />
+    <Content Include="comments\SRS.txt" />
+    <Content Include="comments\TODO.txt" />
+    <Content Include="App.ico" />
+    <Content Include="dlls\BVINITI2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dlls\BVKExt2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="doc.ico" />
+    <Content Include="edit.ico" />
+    <Content Include="img\iso_open.ico" />
+    <Content Include="ref\PsIso.dll" />
+    <Content Include="ref\PsWinControls.dll" />
+    <Content Include="ref\SemWeb.dll" />
+    <None Include="ref\nmock.dll" />
+    <None Include="ref\nunit.core.dll" />
+    <None Include="ref\nunit.framework.dll" />
+    <None Include="ref\NUnitForms.dll" />
+    <None Include="ref\NUnitForms.Recorder.dll" />
+    <None Include="ref\NUnitForms.Test.dll" />
+    <Compile Include="AboutDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutDialog.Designer.cs">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckFileForm.Designer.cs">
+      <DependentUpon>CheckFileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditRecordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditRecordDialog.Designer.cs">
+      <DependentUpon>EditRecordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorsListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ErrorsListDialog.Designer.cs">
+      <DependentUpon>ErrorsListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GettingSchemeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GettingSchemeForm.Designer.cs">
+      <DependentUpon>GettingSchemeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Global.resx</DependentUpon>
+    </Compile>
+    <Compile Include="IsoRecordGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IsoRecordGrid.Designer.cs">
+      <DependentUpon>IsoRecordGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IsoFileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IvApplication.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SaveIsoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveIsoDialog.Designer.cs">
+      <DependentUpon>SaveIsoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SchemeDailog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchemeDailog.Designer.cs">
+      <DependentUpon>SchemeDailog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="TextBoxMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextBoxMessageBox.Designer.cs">
+      <DependentUpon>TextBoxMessageBox.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AboutDialog.resx">
+      <DependentUpon>AboutDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckFileForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CheckFileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditRecordDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EditRecordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorsListDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ErrorsListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GettingSchemeForm.resx">
+      <DependentUpon>GettingSchemeForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Global.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsoFileForm.resx">
+      <DependentUpon>IsoFileForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IsoRecordGrid.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>IsoRecordGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveIsoDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SaveIsoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchemeDailog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SchemeDailog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxMessageBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TextBoxMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="IsoViewer_TemporaryKey.pfx" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\Ps.Iso.Viewer.Properties.Resources.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Ps.Iso.Viewer.cd">
+      <SubType>
+      </SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="App.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="comments\BUGS.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="comments\ChangeLog.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="comments\NOTES.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="comments\SRS.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="comments\TODO.txt">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Interop.BVKOBJLib">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="PsIso">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
