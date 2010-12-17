@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ps.Iso.Viewer.AboutDialog" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIEAARAACCAAGhBAAACAAAAKAgAogAAAAAAAAAACAAA=</HashCode>
+      <FileName>AboutDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.CheckFileForm" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIAAASAAAQCAAAAAAAAAAQCAAAAAAg=</HashCode>
+      <FileName>CheckFileForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.EditRecordDialog" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEMAAGAAgAAACACAAAACAAAIAAAAAAAEEQAAAAA=</HashCode>
+      <FileName>EditRecordDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.ErrorsListDialog" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAACAAABAACACAAAACAAAIAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ErrorsListDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.GettingSchemeForm" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAIAAASAAAQCAAAAAAAAAAQCAAAAAAg=</HashCode>
+      <FileName>GettingSchemeForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.Global" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEADAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.IsoFileForm" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oqKAgIpSAyCgEBBBBgCUEAAKCAAMUwAAkQRBgQAAAAg=</HashCode>
+      <FileName>IsoFileForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.IsoRecordGrid" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIQACAAGAIABACQAAQCAIEAAAAABAAAAAAAgAA=</HashCode>
+      <FileName>IsoRecordGrid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.IvApplication" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>IvApplication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.MainForm" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCAAIASAACAAAgAAABCYAhACCAAgGABACACKAAQAAAA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.SaveIsoDialog" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIIAAAAACAAABAABICAAABCAAAAEAgAgKYAAAAAAAA=</HashCode>
+      <FileName>SaveIsoDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.SchemeDailog" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAACAAAgAAAACAAAACAAAAQAAAAIQAAgIAQAA=</HashCode>
+      <FileName>SchemeDailog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.TextBoxMessageBox" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAABCAAAACAAAAQAAAAIAAAAAAAAA=</HashCode>
+      <FileName>TextBoxMessageBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ps.Iso.Viewer.Properties.Settings" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAEAAEAAAAIAAAAAABAAAABAAAAAAACAA=</HashCode>
+      <FileName>Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -31,6 +31,10 @@
     <SignManifests>true</SignManifests>
     <TargetZone>LocalIntranet</TargetZone>
     <OldToolsVersion>2.0</OldToolsVersion>
+    <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
+    <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
+    <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
+    <SccProvider>Mercurial Source Control Package</SccProvider>
     <PublishUrl>\\Master\sys\EXCHANGE\PAVEL\IsoViewer\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -45,10 +49,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <SccProjectName>&lt;Project Location In Database&gt;</SccProjectName>
-    <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
-    <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
-    <SccProvider>Mercurial Source Control Package</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -114,10 +114,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PsIso, Version=1.0.2638.1737, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\shared\DotNET\PsIso\bin\Release\PsIso.dll</HintPath>
-    </Reference>
+    <Reference Include="PsIso, Version=1.7.3547.30428, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="PsWinControls, Version=1.0.3547.28779, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ref\PsWinControls.dll</HintPath>
@@ -154,15 +151,8 @@
     <Content Include="doc.ico" />
     <Content Include="edit.ico" />
     <Content Include="img\iso_open.ico" />
-    <Content Include="ref\PsIso.dll" />
-    <Content Include="ref\PsWinControls.dll" />
-    <Content Include="ref\SemWeb.dll" />
-    <None Include="ref\nmock.dll" />
-    <None Include="ref\nunit.core.dll" />
-    <None Include="ref\nunit.framework.dll" />
-    <None Include="ref\NUnitForms.dll" />
-    <None Include="ref\NUnitForms.Recorder.dll" />
-    <None Include="ref\NUnitForms.Test.dll" />
+    <Content Include="dlls\PsIso.dll" />
+    <Content Include="dlls\PsWinControls.dll" />
     <Compile Include="AboutDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,11 +201,6 @@
     <Compile Include="IvApplication.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -280,11 +265,6 @@
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <SubType>Designer</SubType>
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="SaveIsoDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>SaveIsoDialog.cs</DependentUpon>
@@ -300,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="IsoViewer_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\Ps.Iso.Viewer.Properties.Resources.datasource" />

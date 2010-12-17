@@ -672,7 +672,8 @@ namespace Ps.Iso.Viewer
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
 			isoFile.nCurRecord = RecordNumber;
-			EditRecordDialog dlg = new EditRecordDialog(isoFile);
+      EditRecordDialog dlg = new EditRecordDialog(isoFile,
+        gridFields.gridFields.SortedColumn, gridFields.gridFields.SortOrder);
 			dlg.ShowDialog();
 		}
 

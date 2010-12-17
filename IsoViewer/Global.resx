@@ -120,4 +120,7 @@
   <data name="IsoFileFilter" xml:space="preserve">
     <value>файлы ISO|*.iso|Все файлы|*.*</value>
   </data>
+	<data name="StrError">
+		<value xml:space="preserve">Ошибка</value>
+	</data>
 </root>
