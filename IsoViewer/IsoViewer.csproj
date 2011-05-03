@@ -281,6 +281,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="comments\err_ISO_Viewer_02.doc" />
     <None Include="IsoViewer_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\Ps.Iso.Viewer.Properties.Resources.datasource" />
