@@ -120,13 +120,21 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PsIso, Version=1.8.4142.36772, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PsIso.1.8.4142.36772\lib\net20\PsIso.dll</HintPath>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PsWinControls, Version=1.0.3547.28779, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="nunit.mocks">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework">
+      <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PsIso, Version=1.9.4161.41179, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>ref\PsWinControls.dll</HintPath>
+      <HintPath>..\packages\PsIso.1.9.4161.41179\lib\net20\PsIso.dll</HintPath>
+    </Reference>
+    <Reference Include="PsWinControls">
+      <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -151,20 +159,18 @@
     <Content Include="comments\SRS.txt" />
     <Content Include="comments\TODO.txt" />
     <Content Include="App.ico" />
-    <Content Include="dlls\BISO.h" />
     <Content Include="dlls\BVINITI2.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="dlls\BVKExt2.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="dlls\nunit.framework.dll" />
-    <Content Include="dlls\SemWeb.dll" />
+    <Content Include="dlls\TextFile2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="doc.ico" />
     <Content Include="edit.ico" />
     <Content Include="img\iso_open.ico" />
-    <Content Include="dlls\PsIso.dll" />
-    <Content Include="dlls\PsWinControls.dll" />
     <Compile Include="AboutDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,7 +244,9 @@
     <Compile Include="TextBoxMessageBox.Designer.cs">
       <DependentUpon>TextBoxMessageBox.cs</DependentUpon>
     </Compile>
-    <Content Include="release\PsIso.dll" />
+    <Content Include="dlls\TextFile1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutDialog.resx">
@@ -294,7 +302,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="comments\err_ISO_Viewer_02.doc" />
     <None Include="IsoViewer_TemporaryKey.pfx" />
     <BaseApplicationManifest Include="Properties\app.manifest" />
     <None Include="packages.config" />
@@ -338,85 +345,76 @@
   <ItemGroup>
     <PublishFile Include="App.ico">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\BUGS.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\ChangeLog.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\NOTES.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\SRS.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\TODO.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="Interop.BVKOBJLib">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="PsIso">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
