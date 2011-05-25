@@ -104,7 +104,6 @@ namespace Ps.Iso.Viewer
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
       this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this.gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       this.panel3 = new System.Windows.Forms.Panel();
       this.tbQuery = new System.Windows.Forms.TextBox();
       this.panel5 = new System.Windows.Forms.Panel();
@@ -126,8 +125,8 @@ namespace Ps.Iso.Viewer
       this.btNext = new System.Windows.Forms.Button();
       this.panel7 = new System.Windows.Forms.Panel();
       this.lvSearchResults = new System.Windows.Forms.ListView();
-      this.colResultRecNum = new System.Windows.Forms.ColumnHeader();
-      this.colResultKeys = new System.Windows.Forms.ColumnHeader();
+      this.colResultRecNum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.colResultKeys = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.panel6 = new System.Windows.Forms.Panel();
       this.label4 = new System.Windows.Forms.Label();
       this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -136,6 +135,7 @@ namespace Ps.Iso.Viewer
       this.miShowScheme = new System.Windows.Forms.MenuItem();
       this.miSave = new System.Windows.Forms.MenuItem();
       this.miSaveAsRdf = new System.Windows.Forms.MenuItem();
+      this.gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       this.splitContainer1.Panel1.SuspendLayout();
       this.splitContainer1.Panel2.SuspendLayout();
       this.splitContainer1.SuspendLayout();
@@ -165,20 +165,10 @@ namespace Ps.Iso.Viewer
       this.splitContainer1.Panel2.Controls.Add(this.panel7);
       this.splitContainer1.Panel2.Controls.Add(this.panel6);
       this.splitContainer1.Panel2Collapsed = true;
-      this.splitContainer1.Size = new System.Drawing.Size(692, 100);
+      this.splitContainer1.Size = new System.Drawing.Size(692, 82);
       this.splitContainer1.SplitterDistance = 75;
       this.splitContainer1.SplitterWidth = 5;
       this.splitContainer1.TabIndex = 0;
-      // 
-      // gridFields
-      // 
-      this.gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.gridFields.EnableEdit = false;
-      this.gridFields.Fields = ((System.Collections.Generic.List<string[]>)(resources.GetObject("gridFields.Fields")));
-      this.gridFields.Location = new System.Drawing.Point(0, 28);
-      this.gridFields.Name = "gridFields";
-      this.gridFields.Size = new System.Drawing.Size(692, 46);
-      this.gridFields.TabIndex = 22;
       // 
       // panel3
       // 
@@ -186,7 +176,7 @@ namespace Ps.Iso.Viewer
       this.panel3.Controls.Add(this.panel5);
       this.panel3.Controls.Add(this.panel2);
       this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panel3.Location = new System.Drawing.Point(0, 74);
+      this.panel3.Location = new System.Drawing.Point(0, 56);
       this.panel3.Name = "panel3";
       this.panel3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.panel3.Size = new System.Drawing.Size(692, 26);
@@ -468,18 +458,28 @@ namespace Ps.Iso.Viewer
       this.miSaveAsRdf.Text = "Сохранить в формате RDF...";
       this.miSaveAsRdf.Click += new System.EventHandler(this.miSaveAsRdf_Click);
       // 
+      // gridFields
+      // 
+      this.gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.gridFields.EnableEdit = true;
+      this.gridFields.Fields = ((System.Collections.Generic.List<string[]>)(resources.GetObject("gridFields.Fields")));
+      this.gridFields.Location = new System.Drawing.Point(0, 28);
+      this.gridFields.Name = "gridFields";
+      this.gridFields.Size = new System.Drawing.Size(692, 28);
+      this.gridFields.TabIndex = 22;
+      // 
       // IsoFileForm
       // 
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-      this.ClientSize = new System.Drawing.Size(692, 100);
+      this.ClientSize = new System.Drawing.Size(692, 82);
       this.Controls.Add(this.splitContainer1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Menu = this.mainMenu1;
       this.Name = "IsoFileForm";
       this.Text = "ISO-файл";
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-      this.Load += new System.EventHandler(this.IsoFileForm_Load);
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IsoFileForm_FormClosing);
+      this.Load += new System.EventHandler(this.IsoFileForm_Load);
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsoFileForm_KeyDown);
       this.splitContainer1.Panel1.ResumeLayout(false);
       this.splitContainer1.Panel2.ResumeLayout(false);
