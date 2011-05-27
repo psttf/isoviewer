@@ -21,7 +21,7 @@ namespace Ps.Iso.Viewer
 		private IContainer components;
 
 		private string filename;
-		private PsIso isoFile;
+		private IsoFile isoFile;
 		private SplitContainer splitContainer1;
 		private Panel panel3;
 		private TextBox tbQuery;
@@ -165,8 +165,8 @@ namespace Ps.Iso.Viewer
       this.splitContainer1.Panel2.Controls.Add(this.panel7);
       this.splitContainer1.Panel2.Controls.Add(this.panel6);
       this.splitContainer1.Panel2Collapsed = true;
-      this.splitContainer1.Size = new System.Drawing.Size(692, 82);
-      this.splitContainer1.SplitterDistance = 75;
+      this.splitContainer1.Size = new System.Drawing.Size(692, 61);
+      this.splitContainer1.SplitterDistance = 57;
       this.splitContainer1.SplitterWidth = 5;
       this.splitContainer1.TabIndex = 0;
       // 
@@ -176,7 +176,7 @@ namespace Ps.Iso.Viewer
       this.panel3.Controls.Add(this.panel5);
       this.panel3.Controls.Add(this.panel2);
       this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.panel3.Location = new System.Drawing.Point(0, 56);
+      this.panel3.Location = new System.Drawing.Point(0, 35);
       this.panel3.Name = "panel3";
       this.panel3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this.panel3.Size = new System.Drawing.Size(692, 26);
@@ -465,13 +465,13 @@ namespace Ps.Iso.Viewer
       this.gridFields.Fields = ((System.Collections.Generic.List<string[]>)(resources.GetObject("gridFields.Fields")));
       this.gridFields.Location = new System.Drawing.Point(0, 28);
       this.gridFields.Name = "gridFields";
-      this.gridFields.Size = new System.Drawing.Size(692, 28);
+      this.gridFields.Size = new System.Drawing.Size(692, 7);
       this.gridFields.TabIndex = 22;
       // 
       // IsoFileForm
       // 
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-      this.ClientSize = new System.Drawing.Size(692, 82);
+      this.ClientSize = new System.Drawing.Size(692, 61);
       this.Controls.Add(this.splitContainer1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Menu = this.mainMenu1;
@@ -684,11 +684,13 @@ namespace Ps.Iso.Viewer
 
 		private void miCheckFile_Click(object sender, EventArgs e)
 		{
-			CheckFileForm cff =
-				new CheckFileForm(isoFile);
-			cff.ShowDialog();
+		  IList<Error> errors;
+      TaskProcessWindow cff =
+        new TaskProcessWindow(a => errors = isoFile.Check(a),
+          "Проверка файла на ошибки");
+      cff.ShowDialog();
 
-			ErrorsListDialog dlg = new ErrorsListDialog(cff.Result);
+      ErrorsListDialog dlg = new ErrorsListDialog(errors);
 			dlg.ShowDialog();
 		}
 

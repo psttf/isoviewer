@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 
 namespace Ps.Iso.Viewer {
+  [Obsolete]
   public partial class EditRecordDialog : Form {
     private readonly PsIso _isoFile;
     private readonly int _recordNumber;

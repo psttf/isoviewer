@@ -23,11 +23,11 @@ namespace Ps.Iso.Viewer
 
 			this.isoFile = isoFile;
 
-			GettingSchemeForm gsd =
-				new GettingSchemeForm(isoFile);
+      IsoFileScheme scheme;
+      TaskProcessWindow gsd =
+        new TaskProcessWindow(a => scheme = isoFile.GetScheme(a),
+          "Вычисление схемы");
 			gsd.ShowDialog();
-
-			IsoFileScheme scheme = gsd.Result;
 
 			if (scheme.Count > 0)
 			{

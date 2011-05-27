@@ -36,7 +36,7 @@
     <SccLocalPath>&lt;Local Binding Root of Project&gt;</SccLocalPath>
     <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
     <SccProvider>Mercurial Source Control Package</SccProvider>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>\\Master\sys\EXCHANGE\PAVEL\IsoViewer\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -51,6 +51,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -129,15 +130,15 @@
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PsIso, Version=1.11.4162.30497, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PsIso, Version=2.0.4164.39027, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PsIso.1.11.4162.30497\lib\net20\PsIso.dll</HintPath>
+      <HintPath>..\packages\PsIso.2.0.4164.39027\lib\net20\PsIso.dll</HintPath>
     </Reference>
     <Reference Include="PsWinControls">
       <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
     </Reference>
     <Reference Include="SemWeb, Version=1.0.6.4, Culture=neutral, PublicKeyToken=3e1051c7e190e42e, processorArchitecture=MSIL">
-      <HintPath>..\packages\PsIso.1.11.4162.30497\lib\net20\SemWeb.dll</HintPath>
+      <HintPath>..\packages\PsIso.2.0.4164.39027\lib\net20\SemWeb.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -177,12 +178,7 @@
     <Compile Include="AboutDialog.Designer.cs">
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="CheckFileForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CheckFileForm.Designer.cs">
-      <DependentUpon>CheckFileForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="ControlExtensions.cs" />
     <Compile Include="EditRecordDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,11 +191,11 @@
     <Compile Include="ErrorsListDialog.Designer.cs">
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="GettingSchemeForm.cs">
+    <Compile Include="TaskProcessWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GettingSchemeForm.Designer.cs">
-      <DependentUpon>GettingSchemeForm.cs</DependentUpon>
+    <Compile Include="TaskProcessWindow.Designer.cs">
+      <DependentUpon>TaskProcessWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Global.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -250,10 +246,6 @@
       <DependentUpon>AboutDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CheckFileForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CheckFileForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="EditRecordDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditRecordDialog.cs</DependentUpon>
@@ -262,8 +254,8 @@
       <SubType>Designer</SubType>
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GettingSchemeForm.resx">
-      <DependentUpon>GettingSchemeForm.cs</DependentUpon>
+    <EmbeddedResource Include="TaskProcessWindow.resx">
+      <DependentUpon>TaskProcessWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Global.resx">
