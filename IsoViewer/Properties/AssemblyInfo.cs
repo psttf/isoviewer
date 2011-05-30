@@ -59,5 +59,7 @@ using System.Security.Permissions;
 [assembly: AssemblyKeyName("")]
 
 // запрос необходимых разрешений
-[assembly: FileIOPermission(SecurityAction.RequestMinimum, Unrestricted = true)]
-[assembly: UIPermission(SecurityAction.RequestMinimum, Window = UIPermissionWindow.SafeSubWindows)]
+//[assembly: FileIOPermission(SecurityAction.RequestMinimum,
+//  Unrestricted = true)]
+//[assembly: UIPermission(SecurityAction.RequestMinimum,
+//  Window = UIPermissionWindow.SafeSubWindows)]

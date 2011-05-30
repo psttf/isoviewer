@@ -1,9 +1,5 @@
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Data;
 using Ps.Iso.Viewer.Properties;
 
 namespace Ps.Iso.Viewer
@@ -11,23 +7,23 @@ namespace Ps.Iso.Viewer
 	/// <summary>
 	/// Summary description for Form1.
 	/// </summary>
-	public class MainForm : System.Windows.Forms.Form
+	public class MainForm : Form
 	{
-		private System.Windows.Forms.MainMenu mainMenu1;
-		private System.Windows.Forms.MenuItem menuItem1;
-		private System.Windows.Forms.MenuItem menuItem2;
-		private System.Windows.Forms.MenuItem miAbout;
-		private System.Windows.Forms.MenuItem menuItem7;
-		private System.Windows.Forms.ToolBar tbOpenIsoFile;
-		private System.Windows.Forms.ToolBarButton btnOpenIsoFile;
-		private System.Windows.Forms.ToolBarButton btnOpenLogFile;
-		private System.Windows.Forms.ImageList imageList1;
-		private System.Windows.Forms.MenuItem miOpenIso;
-		private System.Windows.Forms.OpenFileDialog openIsoFileDlg;
-		private System.Windows.Forms.OpenFileDialog openLogFileDlg;
-		private System.Windows.Forms.MenuItem menuExit;
-		private MenuItem menuItem4;
-		private MenuItem miShowOpenIsoFileButton;
+		private MainMenu _mainMenu1;
+		private MenuItem _menuItem1;
+		private MenuItem _menuItem2;
+		private MenuItem _miAbout;
+		private MenuItem _menuItem7;
+		private ToolBar _tbOpenIsoFile;
+		private ToolBarButton _btnOpenIsoFile;
+		private ToolBarButton _btnOpenLogFile;
+		private ImageList _imageList1;
+		private MenuItem _miOpenIso;
+		private OpenFileDialog _openIsoFileDlg;
+		private OpenFileDialog _openLogFileDlg;
+		private MenuItem _menuExit;
+		private MenuItem _menuItem4;
+		private MenuItem _miShowOpenIsoFileButton;
 		private System.ComponentModel.IContainer components;
 
 		public MainForm()
@@ -48,14 +44,14 @@ namespace Ps.Iso.Viewer
 			InitializeComponent();
 
 			//
-			// TODO: Add any constructor code after InitializeComponent call
+			// constructor code after InitializeComponent call
 			//
 			Init(fileName);
 		}
 
 		private void Init(string fileName)
 		{
-			Settings settings = new Settings();
+			var settings = new Settings();
 			if (settings.MainFormLeft > 0)
 			{
 				Left = settings.MainFormLeft;
@@ -119,174 +115,170 @@ namespace Ps.Iso.Viewer
 		{
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-      this.openIsoFileDlg = new System.Windows.Forms.OpenFileDialog();
-      this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-      this.menuItem1 = new System.Windows.Forms.MenuItem();
-      this.miOpenIso = new System.Windows.Forms.MenuItem();
-      this.menuItem7 = new System.Windows.Forms.MenuItem();
-      this.menuExit = new System.Windows.Forms.MenuItem();
-      this.menuItem4 = new System.Windows.Forms.MenuItem();
-      this.miShowOpenIsoFileButton = new System.Windows.Forms.MenuItem();
-      this.menuItem2 = new System.Windows.Forms.MenuItem();
-      this.miAbout = new System.Windows.Forms.MenuItem();
-      this.tbOpenIsoFile = new System.Windows.Forms.ToolBar();
-      this.btnOpenIsoFile = new System.Windows.Forms.ToolBarButton();
-      this.btnOpenLogFile = new System.Windows.Forms.ToolBarButton();
-      this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-      this.openLogFileDlg = new System.Windows.Forms.OpenFileDialog();
+      this._openIsoFileDlg = new OpenFileDialog();
+      this._mainMenu1 = new MainMenu(this.components);
+      this._menuItem1 = new MenuItem();
+      this._miOpenIso = new MenuItem();
+      this._menuItem7 = new MenuItem();
+      this._menuExit = new MenuItem();
+      this._menuItem4 = new MenuItem();
+      this._miShowOpenIsoFileButton = new MenuItem();
+      this._menuItem2 = new MenuItem();
+      this._miAbout = new MenuItem();
+      this._tbOpenIsoFile = new ToolBar();
+      this._btnOpenIsoFile = new ToolBarButton();
+      this._btnOpenLogFile = new ToolBarButton();
+      this._imageList1 = new ImageList(this.components);
+      this._openLogFileDlg = new OpenFileDialog();
       this.SuspendLayout();
       // 
       // openIsoFileDlg
       // 
-      this.openIsoFileDlg.DefaultExt = "iso";
-      this.openIsoFileDlg.Filter = "файлы ISO|*.iso|Все файлы|*.*";
-      this.openIsoFileDlg.ReadOnlyChecked = true;
-      this.openIsoFileDlg.Title = "Открытие файла";
+      this._openIsoFileDlg.DefaultExt = "iso";
+      this._openIsoFileDlg.Filter = "файлы ISO|*.iso|Все файлы|*.*";
+      this._openIsoFileDlg.ReadOnlyChecked = true;
+      this._openIsoFileDlg.Title = "Открытие файла";
       // 
       // mainMenu1
       // 
-      this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1,
-            this.menuItem4,
-            this.menuItem2});
+      this._mainMenu1.MenuItems.AddRange(new MenuItem[] {
+            this._menuItem1,
+            this._menuItem4,
+            this._menuItem2});
       // 
       // menuItem1
       // 
-      this.menuItem1.Index = 0;
-      this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.miOpenIso,
-            this.menuItem7,
-            this.menuExit});
-      this.menuItem1.MergeType = System.Windows.Forms.MenuMerge.MergeItems;
-      this.menuItem1.Text = "Файл";
+      this._menuItem1.Index = 0;
+      this._menuItem1.MenuItems.AddRange(new MenuItem[] {
+            this._miOpenIso,
+            this._menuItem7,
+            this._menuExit});
+      this._menuItem1.MergeType = MenuMerge.MergeItems;
+      this._menuItem1.Text = "Файл";
       // 
       // miOpenIso
       // 
-      this.miOpenIso.Index = 0;
-      this.miOpenIso.Text = "Открыть ISO-файл...";
-      this.miOpenIso.Click += new System.EventHandler(this.miOpenIso_Click);
+      this._miOpenIso.Index = 0;
+      this._miOpenIso.Text = "Открыть ISO-файл...";
+      this._miOpenIso.Click += new System.EventHandler(this.miOpenIso_Click);
       // 
       // menuItem7
       // 
-      this.menuItem7.Index = 1;
-      this.menuItem7.MergeOrder = 2;
-      this.menuItem7.Text = "-";
+      this._menuItem7.Index = 1;
+      this._menuItem7.MergeOrder = 2;
+      this._menuItem7.Text = "-";
       // 
       // menuExit
       // 
-      this.menuExit.Index = 2;
-      this.menuExit.MergeOrder = 3;
-      this.menuExit.Text = "Выход";
-      this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
+      this._menuExit.Index = 2;
+      this._menuExit.MergeOrder = 3;
+      this._menuExit.Text = "Выход";
+      this._menuExit.Click += new System.EventHandler(this.menuExit_Click);
       // 
       // menuItem4
       // 
-      this.menuItem4.Index = 1;
-      this.menuItem4.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.miShowOpenIsoFileButton});
-      this.menuItem4.Text = "Вид";
+      this._menuItem4.Index = 1;
+      this._menuItem4.MenuItems.AddRange(new MenuItem[] {
+            this._miShowOpenIsoFileButton});
+      this._menuItem4.Text = "Вид";
       // 
       // miShowOpenIsoFileButton
       // 
-      this.miShowOpenIsoFileButton.Index = 0;
-      this.miShowOpenIsoFileButton.Text = "Кнопка \"Открыть ISO-файл\"";
-      this.miShowOpenIsoFileButton.Click += new System.EventHandler(this.menuItem5_Click);
+      this._miShowOpenIsoFileButton.Index = 0;
+      this._miShowOpenIsoFileButton.Text = "Кнопка \"Открыть ISO-файл\"";
+      this._miShowOpenIsoFileButton.Click += new System.EventHandler(this.menuItem5_Click);
       // 
       // menuItem2
       // 
-      this.menuItem2.Index = 2;
-      this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.miAbout});
-      this.menuItem2.Text = "Справка";
+      this._menuItem2.Index = 2;
+      this._menuItem2.MenuItems.AddRange(new MenuItem[] {
+            this._miAbout});
+      this._menuItem2.Text = "Справка";
       // 
       // miAbout
       // 
-      this.miAbout.Index = 0;
-      this.miAbout.Text = "О программе";
-      this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
+      this._miAbout.Index = 0;
+      this._miAbout.Text = "О программе";
+      this._miAbout.Click += new System.EventHandler(this.miAbout_Click);
       // 
       // tbOpenIsoFile
       // 
-      this.tbOpenIsoFile.Appearance = System.Windows.Forms.ToolBarAppearance.Flat;
-      this.tbOpenIsoFile.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
-            this.btnOpenIsoFile,
-            this.btnOpenLogFile});
-      this.tbOpenIsoFile.DropDownArrows = true;
-      this.tbOpenIsoFile.ImageList = this.imageList1;
-      this.tbOpenIsoFile.Location = new System.Drawing.Point(0, 0);
-      this.tbOpenIsoFile.Name = "tbOpenIsoFile";
-      this.tbOpenIsoFile.ShowToolTips = true;
-      this.tbOpenIsoFile.Size = new System.Drawing.Size(694, 28);
-      this.tbOpenIsoFile.TabIndex = 1;
-      this.tbOpenIsoFile.TextAlign = System.Windows.Forms.ToolBarTextAlign.Right;
-      this.tbOpenIsoFile.Visible = false;
-      this.tbOpenIsoFile.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
+      this._tbOpenIsoFile.Appearance = ToolBarAppearance.Flat;
+      this._tbOpenIsoFile.Buttons.AddRange(new ToolBarButton[] {
+            this._btnOpenIsoFile,
+            this._btnOpenLogFile});
+      this._tbOpenIsoFile.DropDownArrows = true;
+      this._tbOpenIsoFile.ImageList = this._imageList1;
+      this._tbOpenIsoFile.Location = new System.Drawing.Point(0, 0);
+      this._tbOpenIsoFile.Name = "_tbOpenIsoFile";
+      this._tbOpenIsoFile.ShowToolTips = true;
+      this._tbOpenIsoFile.Size = new System.Drawing.Size(694, 28);
+      this._tbOpenIsoFile.TabIndex = 1;
+      this._tbOpenIsoFile.TextAlign = ToolBarTextAlign.Right;
+      this._tbOpenIsoFile.Visible = false;
+      this._tbOpenIsoFile.ButtonClick += new ToolBarButtonClickEventHandler(this.toolBar1_ButtonClick);
       // 
       // btnOpenIsoFile
       // 
-      this.btnOpenIsoFile.ImageIndex = 0;
-      this.btnOpenIsoFile.Name = "btnOpenIsoFile";
-      this.btnOpenIsoFile.Tag = "OpenIsoFile";
-      this.btnOpenIsoFile.Text = "Открыть ISO-файл";
+      this._btnOpenIsoFile.ImageIndex = 0;
+      this._btnOpenIsoFile.Name = "btnOpenIsoFile";
+      this._btnOpenIsoFile.Tag = "OpenIsoFile";
+      this._btnOpenIsoFile.Text = "Открыть ISO-файл";
       // 
       // btnOpenLogFile
       // 
-      this.btnOpenLogFile.ImageIndex = 1;
-      this.btnOpenLogFile.Name = "btnOpenLogFile";
-      this.btnOpenLogFile.Tag = "OpenLogFile";
-      this.btnOpenLogFile.Visible = false;
+      this._btnOpenLogFile.ImageIndex = 1;
+      this._btnOpenLogFile.Name = "btnOpenLogFile";
+      this._btnOpenLogFile.Tag = "OpenLogFile";
+      this._btnOpenLogFile.Visible = false;
       // 
       // imageList1
       // 
-      this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-      this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-      this.imageList1.Images.SetKeyName(0, "fileopen.png");
-      this.imageList1.Images.SetKeyName(1, "");
+      this._imageList1.ImageStream = ((ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+      this._imageList1.TransparentColor = System.Drawing.Color.Transparent;
+      this._imageList1.Images.SetKeyName(0, "fileopen.png");
+      this._imageList1.Images.SetKeyName(1, "");
       // 
       // openLogFileDlg
       // 
-      this.openLogFileDlg.DefaultExt = "iso";
-      this.openLogFileDlg.Filter = "файлы ISO|*.iso|Все файлы|*.*";
-      this.openLogFileDlg.ReadOnlyChecked = true;
-      this.openLogFileDlg.Title = "Открытие файла";
+      this._openLogFileDlg.DefaultExt = "iso";
+      this._openLogFileDlg.Filter = "файлы ISO|*.iso|Все файлы|*.*";
+      this._openLogFileDlg.ReadOnlyChecked = true;
+      this._openLogFileDlg.Title = "Открытие файла";
       // 
       // MainForm
       // 
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
       this.ClientSize = new System.Drawing.Size(694, 372);
-      this.Controls.Add(this.tbOpenIsoFile);
+      this.Controls.Add(this._tbOpenIsoFile);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.IsMdiContainer = true;
-      this.Menu = this.mainMenu1;
+      this.Menu = this._mainMenu1;
       this.Name = "MainForm";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+      this.StartPosition = FormStartPosition.Manual;
       this.Text = "Просмотр ISO-файлов";
       this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+      this.FormClosing += new FormClosingEventHandler(this.MainForm_FormClosing);
       this.ResumeLayout(false);
       this.PerformLayout();
 
 		}
 		#endregion
 
-		private void linkLabel1_LinkClicked(object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
-		{}
-
-		private void miOpenIso_Click(object sender, System.EventArgs e)
+	  private void miOpenIso_Click(object sender, EventArgs e)
 		{
 			OpenIsoFile();
 		}
 
 		private void OpenIsoFile()
 		{
-			// TODO: создавать здесь новый диалог
-			if (openIsoFileDlg.ShowDialog() == DialogResult.OK)
+			if (_openIsoFileDlg.ShowDialog() == DialogResult.OK)
 			{
-				new IsoFileForm(openIsoFileDlg.FileName, this).Show();
+				new IsoFileForm(_openIsoFileDlg.FileName, this).Show();
 			}
 		}
 
-		private void toolBar1_ButtonClick(object sender, System.Windows.Forms.ToolBarButtonClickEventArgs e)
+		private void toolBar1_ButtonClick(object sender, ToolBarButtonClickEventArgs e)
 		{
 			if ((string) e.Button.Tag == "OpenIsoFile")
 			{
@@ -294,7 +286,7 @@ namespace Ps.Iso.Viewer
 			}
 		}
 
-		private void menuExit_Click(object sender, System.EventArgs e)
+		private void menuExit_Click(object sender, EventArgs e)
 		{
 			Close();
 		}
@@ -309,26 +301,28 @@ namespace Ps.Iso.Viewer
 
 		private void menuItem5_Click(object sender, EventArgs e)
 		{
-			if (miShowOpenIsoFileButton.Checked)
+			if (_miShowOpenIsoFileButton.Checked)
 			{
-				miShowOpenIsoFileButton.Checked = false;
-				tbOpenIsoFile.Visible = false;
+				_miShowOpenIsoFileButton.Checked = false;
+				_tbOpenIsoFile.Visible = false;
 			}
 			else
 			{
-				miShowOpenIsoFileButton.Checked = true;
-				tbOpenIsoFile.Visible = true;
+				_miShowOpenIsoFileButton.Checked = true;
+				_tbOpenIsoFile.Visible = true;
 			}
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Settings settings = new Settings();
-			settings.MainFormHeight = Height;
-			settings.MainFormWidth = Width;
-			settings.MainFormTop = Top;
-			settings.MainFormLeft = Left;
-			settings.Save();
+			var settings = new Settings
+			                 {
+			                   MainFormHeight = Height,
+			                   MainFormWidth = Width,
+			                   MainFormTop = Top,
+			                   MainFormLeft = Left
+			                 };
+		  settings.Save();
 		}
 
     private void miAbout_Click(object sender, EventArgs e)

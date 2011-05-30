@@ -1,31 +1,28 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
-using System.IO;
 
 namespace Ps.Iso.Viewer
 {
 	public partial class SaveIsoDialog : Form
 	{
-		private PsIso isoFile;
+		private readonly IsoFile _isoFile;
 
-		public SaveIsoDialog(PsIso isoFile)
+		public SaveIsoDialog(IsoFile isoFile)
 		{
 			InitializeComponent();
 
-			this.isoFile = isoFile;
+			_isoFile = isoFile;
 		}
 
 		private void btBrowse_Click(object sender, EventArgs e)
 		{
-			SaveFileDialog dlg = new SaveFileDialog();
-			dlg.DefaultExt = "iso";
-			dlg.Filter = "файлы ISO|*.iso|Все файлы|*.*";
-			if (dlg.ShowDialog() == DialogResult.OK)
+			var dlg = new SaveFileDialog
+			            {
+			              DefaultExt = "iso", Filter = Global.IsoFileFilter
+			            };
+		  if (dlg.ShowDialog() == DialogResult.OK)
 			{
 				tbPath.Text = dlg.FileName;
 			}
@@ -38,19 +35,18 @@ namespace Ps.Iso.Viewer
 			{
 				if (!string.IsNullOrEmpty(tbRecordNumbers.Text))
 				{
-					string[] strs = tbRecordNumbers.Text.Split(new char[] { ',' });
+					var strs = tbRecordNumbers.Text.Split(new[] { ',' });
 					recNums = new List<int>(strs.Length);
-					for (int i = 0; i < strs.Length; i++)
+					foreach (var num in strs.Select(t => Convert.ToInt32(t)))
 					{
-						int num = Convert.ToInt32(strs[i]) ;
-						if ((num >= 0) && (num <= isoFile.nRecordCount))
-						{
-							recNums.Add(num);
-						}
-						else
-						{
-							throw new OverflowException();
-						}
+					  if ((num >= 0) && (num <= _isoFile.Records.Count))
+					  {
+					    recNums.Add(num);
+					  }
+					  else
+					  {
+					    throw new OverflowException();
+					  }
 					}
 
 					if (string.IsNullOrEmpty(tbPath.Text))
@@ -58,20 +54,15 @@ namespace Ps.Iso.Viewer
 						throw new Exception("Введите путь к файлу");
 					}
 
-					//создание файла
-					StreamWriter newFile = new StreamWriter(
-						new FileStream(tbPath.Text,
-						  FileMode.Create),Encoding.GetEncoding(1251));
-					if (rbSaveAllExceptSelected.Checked)
-					{
-						PsIso.SaveAllExceptSelected(isoFile, recNums, newFile);
-					}
-					else
-					{
-						PsIso.SaveSelected(isoFile, recNums, newFile);
-					}
-					newFile.Close();
+				  Action<Action<int>> task;
 
+          if (rbSaveAll.Checked)
+            task = a => _isoFile.Save(tbPath.Text, a);
+					else if (rbSaveAllExceptSelected.Checked)
+            task = a => _isoFile.SaveExcept(tbPath.Text, recNums, a);
+          else task = a => _isoFile.SaveOnly(tbPath.Text, recNums, a);
+
+          new TaskProcessWindow(task,"Сохранение").ShowDialog();
 					Close();
 				}
 				else
@@ -86,7 +77,7 @@ namespace Ps.Iso.Viewer
 			catch (OverflowException)
 			{
 				IsoFileForm.PrintError("Номера должны быть в диапазоне от 0 до "
-					+ isoFile.nRecordCount.ToString() + " включительно");
+					+ _isoFile.Records.Count + " включительно");
 			}
 			catch (Exception exception)
 			{

@@ -22,24 +22,24 @@ namespace Ps.Iso.Viewer {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Global {
+    public class IsoFileForm {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Global() {
+        internal IsoFileForm() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ps.Iso.Viewer.Global", typeof(Global).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ps.Iso.Viewer.IsoFileForm", typeof(IsoFileForm).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Ps.Iso.Viewer {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -60,39 +60,38 @@ namespace Ps.Iso.Viewer {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to файлы ISO|*.iso|Все файлы|*.*.
-        /// </summary>
-        internal static string IsoFileFilter {
+        public static System.Drawing.Bitmap _btNext_Image {
             get {
-                return ResourceManager.GetString("IsoFileFilter", resourceCulture);
+                object obj = ResourceManager.GetObject("_btNext.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to файлы RDF|*.rdf|Все файлы|*.*.
-        /// </summary>
-        internal static string IsoFileForm_miSaveAsRdf_Click_Filename_Filter {
+        public static System.Drawing.Bitmap _btnFirst_Image {
             get {
-                return ResourceManager.GetString("IsoFileForm_miSaveAsRdf_Click_Filename_Filter", resourceCulture);
+                object obj = ResourceManager.GetObject("_btnFirst.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Ошибка.
-        /// </summary>
-        internal static string IsoFileForm_PrintError_Error {
+        public static System.Drawing.Bitmap _btnLast_Image {
             get {
-                return ResourceManager.GetString("IsoFileForm_PrintError_Error", resourceCulture);
+                object obj = ResourceManager.GetObject("_btnLast.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to Ошибка.
-        /// </summary>
-        internal static string StrError {
+        public static System.Drawing.Bitmap _btPrev_Image {
             get {
-                return ResourceManager.GetString("StrError", resourceCulture);
+                object obj = ResourceManager.GetObject("_btPrev.Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Point _mainMenu1_TrayLocation {
+            get {
+                object obj = ResourceManager.GetObject("_mainMenu1.TrayLocation", resourceCulture);
+                return ((System.Drawing.Point)(obj));
             }
         }
     }

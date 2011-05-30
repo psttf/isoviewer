@@ -123,4 +123,10 @@
 	<data name="StrError">
 		<value xml:space="preserve">Ошибка</value>
 	</data>
+	<data name="IsoFileForm_PrintError_Error">
+		<value xml:space="preserve">Ошибка</value>
+	</data>
+	<data name="IsoFileForm_miSaveAsRdf_Click_Filename_Filter">
+		<value xml:space="preserve">файлы RDF|*.rdf|Все файлы|*.*</value>
+	</data>
 </root>

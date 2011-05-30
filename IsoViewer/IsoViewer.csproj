@@ -37,6 +37,7 @@
     <SccAuxPath>&lt;Source Control Database&gt;</SccAuxPath>
     <SccProvider>Mercurial Source Control Package</SccProvider>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <PublishUrl>\\Master\sys\EXCHANGE\PAVEL\IsoViewer\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -51,7 +52,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -130,15 +130,12 @@
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PsIso, Version=2.0.4164.39027, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PsIso, Version=2.0.4168.3519, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PsIso.2.0.4164.39027\lib\net20\PsIso.dll</HintPath>
+      <HintPath>..\packages\PsIso.2.0.4168.3519\lib\net40-Client\PsIso.dll</HintPath>
     </Reference>
     <Reference Include="PsWinControls">
       <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
-    </Reference>
-    <Reference Include="SemWeb, Version=1.0.6.4, Culture=neutral, PublicKeyToken=3e1051c7e190e42e, processorArchitecture=MSIL">
-      <HintPath>..\packages\PsIso.2.0.4164.39027\lib\net20\SemWeb.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -179,9 +176,7 @@
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlExtensions.cs" />
-    <Compile Include="EditRecordDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="EditRecordDialog.cs" />
     <Compile Include="EditRecordDialog.Designer.cs">
       <DependentUpon>EditRecordDialog.cs</DependentUpon>
     </Compile>
@@ -190,6 +185,14 @@
     </Compile>
     <Compile Include="ErrorsListDialog.Designer.cs">
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IsoFileForm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsoFileForm.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NumberedDataGridView.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="TaskProcessWindow.cs">
       <SubType>Form</SubType>
@@ -266,6 +269,8 @@
     <EmbeddedResource Include="IsoFileForm.resx">
       <DependentUpon>IsoFileForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IsoFileForm.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="IsoRecordGrid.resx">
       <SubType>Designer</SubType>

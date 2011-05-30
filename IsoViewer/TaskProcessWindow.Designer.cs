@@ -66,7 +66,7 @@ namespace Ps.Iso.Viewer
       this.Controls.Add(this.lblTitle);
       this.Controls.Add(this.pbProcessProgress);
       this.Name = "TaskProcessWindow";
-      this.Shown += new System.EventHandler(this.Form_Shown);
+      this.Shown += new System.EventHandler(this.TaskProcessWindow_Shown);
       this.ResumeLayout(false);
       this.PerformLayout();
 
