@@ -26,10 +26,13 @@ namespace Ps.Iso.Viewer
     public IsoRecord Record {
       get {
         var fields = new List<IsoRecordField>(gridFields.Rows.Count);
-        fields.AddRange(from DataGridViewRow row in gridFields.Rows
+        fields.AddRange(
+          from DataGridViewRow row in gridFields.ContentRows
+          orderby GetFieldIndex(row)
           select new IsoRecordField((string)row.Cells["colKey"].Value,
-            (string)row.Cells["colValue"].Value));
-        return new IsoRecord(fields.GetRange(0,fields.Count - 1));
+            (string)row.Cells["colValue"].Value)
+        );
+        return new IsoRecord(fields);
       }
       set {
         if (gridFields == null) return;
@@ -37,8 +40,10 @@ namespace Ps.Iso.Viewer
         var sortColumn = gridFields.SortedColumn;
         gridFields.AutoGenerateColumns = false;
         var sortDirection = gridFields.SortOrder;
-        foreach (var field in value.Fields)
-          gridFields.Rows.Add(new[] {field.Name, field.Value});
+        for (var i = 0; i < value.Fields.Count; i++) {
+          var field = value.Fields[i];
+          gridFields.Rows.Add(new object[] {i, field.Name, field.Value});
+        }
 
         if (sortColumn != null && sortDirection != SortOrder.None)
           gridFields.Sort(sortColumn,
@@ -65,19 +70,18 @@ namespace Ps.Iso.Viewer
         gridFields.FirstDisplayedScrollingRowIndex = fieldNumbers[0];
     }
 
-// ReSharper disable InconsistentNaming
-		public bool enableEdit;
-// ReSharper restore InconsistentNaming
+		private bool _enableEdit;
+	  public const string ColNumberId = "colNumber";
 
 		public bool EnableEdit
 		{
-			get { return enableEdit; }
+			get { return _enableEdit; }
 			set
 			{
-				enableEdit = value;
-				gridFields.RowHeadersVisible = enableEdit;
-				gridFields.AllowUserToAddRows = enableEdit;
-				gridFields.AllowUserToDeleteRows = enableEdit;
+				_enableEdit = value;
+				gridFields.RowHeadersVisible = _enableEdit;
+				gridFields.AllowUserToAddRows = _enableEdit;
+				gridFields.AllowUserToDeleteRows = _enableEdit;
 			}
 		}
 
@@ -86,26 +90,74 @@ namespace Ps.Iso.Viewer
 			gridFields.Show();
 		}
 
-		private void gridFields_SortCompare(object sender,
-			DataGridViewSortCompareEventArgs e)
-		{
+		private void gridFields_SortCompare(
+      object sender,
+			DataGridViewSortCompareEventArgs e
+    ) {
 			// Try to sort based on the cells in the current column.
 			e.SortResult = Comparer.Default.Compare(e.CellValue1, e.CellValue2);
 
 			// If the cells are equal, sort based on the colNumber column.
-			if (e.SortResult == 0 && e.Column.Name != "colNumber")
+			if (e.SortResult == 0 && e.Column.Name != ColNumberId)
 			{
-				e.SortResult = (int) gridFields.Rows[e.RowIndex1]
-							.Cells["colNumber"].Value
-					-	(int) gridFields.Rows[e.RowIndex2]
-							.Cells["colNumber"].Value;
+				e.SortResult = GetFieldIndex(gridFields.Rows[e.RowIndex1])
+          - GetFieldIndex(gridFields.Rows[e.RowIndex2]);
 			}
 			e.Handled = true;
 		}
 
-    private void gridFields_CellValueChanged(object sender,
-      DataGridViewCellEventArgs e) {
+    private void gridFields_CellValueChanged(
+      object sender,
+      DataGridViewCellEventArgs e
+    ) {
       WasEdited = true;
+    }
+
+    private void gridFields_DefaultValuesNeeded(
+      object sender,
+      DataGridViewRowEventArgs e
+    ) {
+      SetFieldIndex(e.Row, gridFields.ContentRows.Count());
+    }
+
+    private void gridFields_UserDeletedRow(
+      object sender,
+      DataGridViewRowEventArgs e
+    ) {
+      var deletedIndex = GetFieldIndex(e.Row);
+      foreach (var row in
+        gridFields.Rows.Cast<DataGridViewRow>().
+        Where(row =>
+          row != gridFields.ContentRows &&
+            GetFieldIndex(row) > deletedIndex
+        )
+      ) {
+        SetFieldIndex(row, GetFieldIndex(row) - 1);
+      }
+    }
+
+// ReSharper disable PossibleNullReferenceException
+	  int ColNumberIndex { get { return gridFields.Columns[ColNumberId].Index; } }
+// ReSharper restore PossibleNullReferenceException
+
+    public int GetFieldIndex(DataGridViewRow r) {
+      return (int)r.Cells[ColNumberIndex].Value;
+    }
+
+    public void SetFieldIndex(DataGridViewRow r, int value) {
+      r.Cells[ColNumberIndex].Value = value;
+    }
+
+    internal void EditNewRecord() { BeginEditKey(gridFields.Rows[0]); }
+
+	  internal void EditFieldKey(int index) {
+      BeginEditKey(gridFields.Rows.OfType<DataGridViewRow>().
+        First(r => GetFieldIndex(r) == index));
+    }
+
+    private void BeginEditKey(DataGridViewRow row) {
+      gridFields.CurrentCell = row.Cells["colKey"];
+      gridFields.BeginEdit(true);
     }
   }
 }

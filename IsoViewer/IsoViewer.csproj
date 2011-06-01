@@ -130,9 +130,9 @@
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PsIso, Version=2.0.4168.3519, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PsIso, Version=2.0.4169.34540, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PsIso.2.0.4168.3519\lib\net40-Client\PsIso.dll</HintPath>
+      <HintPath>..\packages\PsIso.2.0.4169.34540\lib\net40-Client\PsIso.dll</HintPath>
     </Reference>
     <Reference Include="PsWinControls">
       <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
@@ -186,11 +186,7 @@
     <Compile Include="ErrorsListDialog.Designer.cs">
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="IsoFileForm.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IsoFileForm.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="NumberedDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -269,8 +265,6 @@
     <EmbeddedResource Include="IsoFileForm.resx">
       <DependentUpon>IsoFileForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IsoFileForm.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="IsoRecordGrid.resx">
       <SubType>Designer</SubType>
@@ -339,72 +333,72 @@
   <ItemGroup>
     <PublishFile Include="App.ico">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\BUGS.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\ChangeLog.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\NOTES.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\SRS.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="comments\TODO.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="PsIso">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>

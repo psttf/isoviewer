@@ -129,4 +129,7 @@
 	<data name="IsoFileForm_miSaveAsRdf_Click_Filename_Filter">
 		<value xml:space="preserve">файлы RDF|*.rdf|Все файлы|*.*</value>
 	</data>
+	<data name="IvApplication_Main_NoAcces">
+		<value xml:space="preserve">Нет разрешения на доступ к файлам. Возможно, это вызвано тем, что приложение запущено с сетевого диска. Попробуйте запустить приложение с локального диска.</value>
+	</data>
 </root>

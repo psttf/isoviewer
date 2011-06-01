@@ -7,10 +7,7 @@ namespace Ps.Iso.Viewer
 {
 	public class IvApplication
 	{
-		public IvApplication()
-		{}
-		
-		/// <summary>
+	  /// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
@@ -30,7 +27,7 @@ namespace Ps.Iso.Viewer
 			}
 			catch (SecurityException)
 			{
-				MessageBox.Show("Нет разрешения на доступ к файлам. Возможно, это вызвано тем, что приложение запущено с сетевого диска. Попробуйте запустить приложение с локального диска.");
+				MessageBox.Show(Global.IvApplication_Main_NoAcces);
 			} 
 			//Application.Exit();
 		}

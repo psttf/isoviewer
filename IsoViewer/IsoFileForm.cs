@@ -3,102 +3,98 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Ps.Iso.Viewer
-{
-	/// <summary>
-	/// Summary description for IsoFileForm.
-	/// </summary>
-	public class IsoFileForm : Form
-	{
-		private IContainer components;
+namespace Ps.Iso.Viewer {
+  /// <summary>
+  /// Summary description for IsoFileForm.
+  /// </summary>
+  public class IsoFileForm : Form {
+    private IContainer components;
 
-		private readonly string _filename;
-		private IsoFile _isoFile;
-		private SplitContainer _splitContainer1;
-		private Panel _panel3;
-		private TextBox _tbQuery;
-		private Panel _panel5;
-		private Label _label3;
-		private Button _btFind;
-		private Label _label2;
-		private TextBox _tbCurRecNum;
-		private Button _btJump;
-		private Button _btPrev;
-		private Button _btNext;
-		private Panel _panel1;
-		private Label _label1;
-		private Label _lblRecordCount;
-		private Panel _panel7;
-		private Panel _panel6;
-		private ListView _lvSearchResults;
-		private ColumnHeader _colResultRecNum;
-		private ColumnHeader _colResultKeys;
-		private Label _label4;
+    private readonly string _filename;
+    private IsoFile _isoFile;
+    private SplitContainer _splitContainer1;
+    private Panel _panel3;
+    private TextBox _tbQuery;
+    private Panel _panel5;
+    private Label _label3;
+    private Button _btFind;
+    private Label _label2;
+    private TextBox _tbCurRecNum;
+    private Button _btJump;
+    private Button _btPrev;
+    private Button _btNext;
+    private Panel _panel1;
+    private Label _label1;
+    private Label _lblRecordCount;
+    private Panel _panel7;
+    private Panel _panel6;
+    private ListView _lvSearchResults;
+    private ColumnHeader _colResultRecNum;
+    private ColumnHeader _colResultKeys;
+    private Label _label4;
 
-		private List<SearchResult> _searchResults;
-		private List<int> _highlightedFields;
-		private MainMenu _mainMenu1;
-		private MenuItem _menuItem1;
-		private MenuItem _miSave;
-		private Button _btnFirst;
+    private List<SearchResult> _searchResults;
+    private List<int> _highlightedFields;
+    private MainMenu _mainMenu1;
+    private MenuItem _menuItem1;
+    private MenuItem _miSave;
+    private Button _btnFirst;
     private Button _btnLast;
-		private MenuItem _miCheckFile;
-		private IsoRecordGrid _gridFields;
-		private Panel _panel2;
-		private TextBox _tbSearchKey;
-		private Label _label5;
-		private MenuItem _miShowScheme;
+    private MenuItem _miCheckFile;
+    private IsoRecordGrid _gridFields;
+    private Panel _panel2;
+    private TextBox _tbSearchKey;
+    private Label _label5;
+    private MenuItem _miShowScheme;
     private MenuItem _miSaveAsRdf;
+    private Button _btDelete;
+    private Button _btInsertAfter;
+    private Button _btInsertBefore;
 
-		/// <summary>
-		/// Номер текущей записи
-		/// </summary>
-		private int _recordNumber;
+    /// <summary>
+    /// Номер текущей записи
+    /// </summary>
+    private int _currentRecordIndex;
 
-		public IsoFileForm(string filename, Form parentForm)
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
+    public IsoFileForm(string filename, Form parentForm) {
+      //
+      // Required for Windows Form Designer support
+      //
+      InitializeComponent();
 
-			//
-			// constructor code after InitializeComponent call
-			//
-			_filename = filename;
-			Text = filename;
-			MdiParent = parentForm;
-		}
+      //
+      // constructor code after InitializeComponent call
+      //
+      _filename = filename;
+      Text = filename;
+      MdiParent = parentForm;
+    }
 
-	  public override sealed string Text
-	  {
-	    get { return base.Text; }
-	    set { base.Text = value; }
-	  }
+    public override sealed string Text {
+      get { return base.Text; }
+      set { base.Text = value; }
+    }
 
-	  /// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				if (components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose(disposing);
-		}
+    /// <summary>
+    /// Clean up any resources being used.
+    /// </summary>
+    protected override void Dispose(bool disposing) {
+      if (disposing) {
+        if (components != null) {
+          components.Dispose();
+        }
+      }
+      base.Dispose(disposing);
+    }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+    #region Windows Form Designer generated code
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
+      Ps.Iso.IsoRecord isoRecord1 = new Ps.Iso.IsoRecord();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
       this._splitContainer1 = new System.Windows.Forms.SplitContainer();
       this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
@@ -111,6 +107,9 @@ namespace Ps.Iso.Viewer
       this._tbSearchKey = new System.Windows.Forms.TextBox();
       this._label5 = new System.Windows.Forms.Label();
       this._panel1 = new System.Windows.Forms.Panel();
+      this._btDelete = new System.Windows.Forms.Button();
+      this._btInsertAfter = new System.Windows.Forms.Button();
+      this._btInsertBefore = new System.Windows.Forms.Button();
       this._btnFirst = new System.Windows.Forms.Button();
       this._btnLast = new System.Windows.Forms.Button();
       this._label2 = new System.Windows.Forms.Label();
@@ -173,6 +172,7 @@ namespace Ps.Iso.Viewer
       this._gridFields.EnableEdit = true;
       this._gridFields.Location = new System.Drawing.Point(0, 28);
       this._gridFields.Name = "_gridFields";
+      this._gridFields.Record = isoRecord1;
       this._gridFields.Size = new System.Drawing.Size(692, 7);
       this._gridFields.TabIndex = 22;
       // 
@@ -257,6 +257,9 @@ namespace Ps.Iso.Viewer
       // 
       // _panel1
       // 
+      this._panel1.Controls.Add(this._btDelete);
+      this._panel1.Controls.Add(this._btInsertAfter);
+      this._panel1.Controls.Add(this._btInsertBefore);
       this._panel1.Controls.Add(this._btnFirst);
       this._panel1.Controls.Add(this._btnLast);
       this._panel1.Controls.Add(this._label2);
@@ -271,6 +274,36 @@ namespace Ps.Iso.Viewer
       this._panel1.Name = "_panel1";
       this._panel1.Size = new System.Drawing.Size(692, 28);
       this._panel1.TabIndex = 18;
+      // 
+      // _btDelete
+      // 
+      this._btDelete.Image = ((System.Drawing.Image)(resources.GetObject("_btDelete.Image")));
+      this._btDelete.Location = new System.Drawing.Point(640, 4);
+      this._btDelete.Name = "_btDelete";
+      this._btDelete.Size = new System.Drawing.Size(30, 23);
+      this._btDelete.TabIndex = 15;
+      this._btDelete.UseVisualStyleBackColor = true;
+      this._btDelete.Click += new System.EventHandler(this._btDelete_Click);
+      // 
+      // _btInsertAfter
+      // 
+      this._btInsertAfter.Image = ((System.Drawing.Image)(resources.GetObject("_btInsertAfter.Image")));
+      this._btInsertAfter.Location = new System.Drawing.Point(593, 4);
+      this._btInsertAfter.Name = "_btInsertAfter";
+      this._btInsertAfter.Size = new System.Drawing.Size(30, 23);
+      this._btInsertAfter.TabIndex = 14;
+      this._btInsertAfter.UseVisualStyleBackColor = true;
+      this._btInsertAfter.Click += new System.EventHandler(this._btInsertAfter_Click);
+      // 
+      // _btInsertBefore
+      // 
+      this._btInsertBefore.Image = ((System.Drawing.Image)(resources.GetObject("_btInsertBefore.Image")));
+      this._btInsertBefore.Location = new System.Drawing.Point(557, 4);
+      this._btInsertBefore.Name = "_btInsertBefore";
+      this._btInsertBefore.Size = new System.Drawing.Size(30, 23);
+      this._btInsertBefore.TabIndex = 13;
+      this._btInsertBefore.UseVisualStyleBackColor = true;
+      this._btInsertBefore.Click += new System.EventHandler(this._btInsertBefore_Click);
       // 
       // _btnFirst
       // 
@@ -480,217 +513,204 @@ namespace Ps.Iso.Viewer
       this._panel6.PerformLayout();
       this.ResumeLayout(false);
 
-		}
-		#endregion
+    }
+    #endregion
 
-	  /// <summary>
-		/// Должен использоваться при каждой смене текущей записи
-		/// </summary>
-		/// <param name="recNum">номер записи</param>
-		private void GoToRecord(int recNum)
-		{
-      try
-      {
-        RememberChanges();
+    /// <summary>
+    /// Должен использоваться при каждой смене текущей записи
+    /// </summary>
+    /// <param name="recNum">номер записи</param>
+    private void GoToRecord(int recNum) {
+      try {
+        if (!RememberChanges()) return;
 
         var record = _isoFile.Records[recNum];
         _gridFields.Record = record;
         _gridFields.HighlightFields(_highlightedFields);
 
-				_recordNumber = recNum;
-				_tbCurRecNum.Text = _recordNumber.ToString();
-				_btNext.Enabled = _recordNumber != _isoFile.Records.Count - 1;
-				_btPrev.Enabled = _recordNumber != 0;
+        _currentRecordIndex = recNum;
+        _tbCurRecNum.Text = _currentRecordIndex.ToString();
+        _btNext.Enabled = _currentRecordIndex != _isoFile.Records.Count - 1;
+        _btPrev.Enabled = _currentRecordIndex != 0;
+      } catch (Exception exception) {
+        Helper.ReportError(exception.Message);
       }
-      catch (Exception exception)
-      {
-        PrintError(exception.Message);
+    }
+
+    private bool RememberChanges() {
+      if (!_gridFields.WasEdited) return true;
+      try {
+        _gridFields.Record.Validate();
+        _isoFile.Records[_currentRecordIndex] = _gridFields.Record;
+        return true;
+      } catch (EmptyFieldsException) {
+        Helper.ReportError("Запись должна содержать хотя бы одно поле");
+        _gridFields.EditNewRecord();
+        return false;
+      } catch (EmptyFieldNameException e) {
+        Helper.ReportError(string.
+          Format("Ключ поля не должен быть пустым (поле №{0})", e.FieldIndex));
+        _gridFields.EditFieldKey(e.FieldIndex);
+        return false;
       }
-		}
+    }
 
-	  private void RememberChanges()
-	  {
-	    if (_gridFields.WasEdited)
-	      _isoFile.Records[_recordNumber] = _gridFields.Record;
-	  }
+    private void btNext_Click(object sender, EventArgs e) {
+      GoToNext();
+    }
 
-	  private void btNext_Click(object sender, EventArgs e)
-		{
-			GoToNext();
-		}
+    private void GoToNext() {
+      if (_currentRecordIndex >= _isoFile.Records.Count - 1) return;
+      _highlightedFields = null;
+      GoToRecord(_currentRecordIndex + 1);
+    }
 
-		private void GoToNext()
-		{
-		  if (_recordNumber >= _isoFile.Records.Count - 1) return;
-		  _highlightedFields = null;
-		  GoToRecord(_recordNumber + 1);
-		}
+    private void btPrev_Click(object sender, EventArgs e) {
+      GoToPrevious();
+    }
 
-		private void btPrev_Click(object sender, EventArgs e)
-		{
-			GoToPrevious();
-		}
+    private void GoToPrevious() {
+      if (_currentRecordIndex > 0) {
+        _highlightedFields = null;
+        GoToRecord(_currentRecordIndex - 1);
+      }
+    }
 
-		private void GoToPrevious()
-		{
-			if (_recordNumber > 0)
-			{
-				_highlightedFields = null;
-				GoToRecord(_recordNumber - 1);
-			}
-		}
-
-		private void btJump_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				int val = Convert.ToInt32(_tbCurRecNum.Text);
-				int newRecNum;
-				if (val < 0)
-				{
-					newRecNum = 0;
-				}
-				else if (val >= _isoFile.Records.Count)
-				{
+    private void btJump_Click(object sender, EventArgs e) {
+      try {
+        int val = Convert.ToInt32(_tbCurRecNum.Text);
+        int newRecNum;
+        if (val < 0) {
+          newRecNum = 0;
+        } else if (val >= _isoFile.Records.Count) {
           newRecNum = _isoFile.Records.Count - 1;
-				}
-				else
-				{
-					newRecNum = val;
-				}
-				_highlightedFields = null;
-				GoToRecord(newRecNum);
-			}
-			catch
-			{
-				PrintError("Введите число!");
-			}
-		}
+        } else {
+          newRecNum = val;
+        }
+        _highlightedFields = null;
+        GoToRecord(newRecNum);
+      } catch {
+        Helper.ReportError("Введите число!");
+      }
+    }
 
-		private void btFind_Click(object sender, EventArgs e)
-		{
-			if (_tbQuery.Text != null)
-			{
-				_lvSearchResults.Items.Clear();
-				List<Error> errors;
-				_searchResults = _isoFile.Search(_tbQuery.Text,
-					_tbSearchKey.Text,
-					out errors);
-				if (errors.Count > 0)
-				{
-					var dlg = new ErrorsListDialog(errors);
-					dlg.ShowDialog();
-				}
-				foreach (var result in _searchResults)
-				{
-					_lvSearchResults.Items.
+    private void btFind_Click(object sender, EventArgs e) {
+      if (_tbQuery.Text != null) {
+        _lvSearchResults.Items.Clear();
+        List<Error> errors;
+        _searchResults = _isoFile.Search(_tbQuery.Text,
+          _tbSearchKey.Text,
+          out errors);
+        if (errors.Count > 0) {
+          var dlg = new ErrorsListDialog(errors);
+          dlg.ShowDialog();
+        }
+        foreach (var result in _searchResults) {
+          _lvSearchResults.Items.
             Add(new ListViewItem(new[] {result.RecordNumber.ToString(),
 					    result.FieldNumbers.Count.ToString()}));
-				}
-				_splitContainer1.Panel2Collapsed = false;
-			}
-		}
+        }
+        _splitContainer1.Panel2Collapsed = false;
+      }
+    }
 
-		private void lvSearchResults_ItemActivate(object sender, EventArgs e)
-		{
-			_highlightedFields = _searchResults[_lvSearchResults.SelectedIndices[0]].FieldNumbers;
-			GoToRecord(_searchResults[_lvSearchResults.SelectedIndices[0]].RecordNumber);
-		}
+    private void lvSearchResults_ItemActivate(object sender, EventArgs e) {
+      _highlightedFields = _searchResults[_lvSearchResults.SelectedIndices[0]].FieldNumbers;
+      GoToRecord(_searchResults[_lvSearchResults.SelectedIndices[0]].RecordNumber);
+    }
 
-		public new void Show()
-		{
-			try
-			{
+    public new void Show() {
+      try {
         _isoFile = IsoFile.Load(_filename);
-				_lblRecordCount.Text = _isoFile.Records.Count.ToString();
+        _lblRecordCount.Text = _isoFile.Records.Count.ToString();
 
-				_highlightedFields = null;
-				GoToRecord(0);
+        _highlightedFields = null;
+        GoToRecord(0);
 
-				base.Show();
-			}
-			catch (Exception exception)
-			{
-				PrintError(exception.Message);
-			}
-		}
+        base.Show();
+      } catch (Exception exception) {
+        Helper.ReportError(exception.Message);
+      }
+    }
 
-		public static void PrintError(string message)
-		{
-			MessageBox.Show(message,
-				Global.IsoFileForm_PrintError_Error,
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Error);
-		}
-
-		private void miSave_Click(object sender, EventArgs e)
-		{
-      RememberChanges(); 
+    private void miSave_Click(object sender, EventArgs e) {
+      if (!RememberChanges()) return;
       new SaveIsoDialog(_isoFile).Show();
-		}
+    }
 
-		private void btnFirst_Click(object sender, EventArgs e)
-		{
-			GoToHome();
-		}
+    private void btnFirst_Click(object sender, EventArgs e) {
+      GoToHome();
+    }
 
-		private void GoToHome()
-		{
-			GoToRecord(0);
-		}
+    private void GoToHome() {
+      GoToRecord(0);
+    }
 
-		private void btnLast_Click(object sender, EventArgs e)
-		{
-			GoToEnd();
-		}
+    private void btnLast_Click(object sender, EventArgs e) {
+      GoToEnd();
+    }
 
-		private void GoToEnd()
-		{
-			GoToRecord(_isoFile.Records.Count - 1);
-		}
+    private void GoToEnd() {
+      GoToRecord(_isoFile.Records.Count - 1);
+    }
 
-		private void IsoFileForm_FormClosing(object sender, FormClosingEventArgs e)
-		{
-			_isoFile.Dispose();
-		}
+    private void IsoFileForm_FormClosing(object sender, FormClosingEventArgs e) {
+      _isoFile.Dispose();
+    }
 
-		private void miCheckFile_Click(object sender, EventArgs e)
-		{
-		  IList<Error> errors = null;
+    private void miCheckFile_Click(object sender, EventArgs e) {
+      IList<Error> errors = null;
       var cff = new TaskProcessWindow(a => errors = _isoFile.Check(a),
         "Проверка файла на ошибки");
       cff.ShowDialog();
 
       var dlg = new ErrorsListDialog(errors);
-			dlg.ShowDialog();
-		}
+      dlg.ShowDialog();
+    }
 
-		private void miShowScheme_Click(object sender, EventArgs e)
-		{
-			var dlg = new SchemeDailog(_isoFile);
-			dlg.Show();
-		}
+    private void miShowScheme_Click(object sender, EventArgs e) {
+      var dlg = new SchemeDailog(_isoFile);
+      dlg.Show();
+    }
 
-		private void IsoFileForm_KeyDown(object sender, KeyEventArgs e)
-		{
-			switch (e.KeyData)
-			{
-				case Keys.Left:
-					GoToPrevious();
-					break;
+    private void IsoFileForm_KeyDown(object sender, KeyEventArgs e) {
+      switch (e.KeyData) {
+        case Keys.Left:
+          GoToPrevious();
+          break;
 
-				case Keys.Right:
-					GoToNext();
-					break;
+        case Keys.Right:
+          GoToNext();
+          break;
 
-				case Keys.Home:
-					GoToHome();
-					break;
+        case Keys.Home:
+          GoToHome();
+          break;
 
-				case Keys.End:
-					GoToEnd();
-					break;
-			}
+        case Keys.End:
+          GoToEnd();
+          break;
+      }
+    }
+
+    private void _btInsertBefore_Click(object sender, EventArgs e)
+    {
+      InsertNewRecord(_currentRecordIndex);
+    }
+
+    private void _btInsertAfter_Click(object sender, EventArgs e) {
+      InsertNewRecord(_currentRecordIndex + 1);
+    }
+
+    private void InsertNewRecord(int index) {
+      _isoFile.Records.Insert(index, new IsoRecord());
+      GoToRecord(index);
+      _gridFields.EditNewRecord();
+    }
+
+    private void _btDelete_Click(object sender, EventArgs e) {
+      _isoFile.Records.RemoveAt(_currentRecordIndex);
+      GoToRecord(_currentRecordIndex);
     }
 
     //private void miSaveAsRdf_Click(object sender, EventArgs e)
@@ -711,5 +731,5 @@ namespace Ps.Iso.Viewer
     //      }
     //  }
     //}
-	}
+  }
 }

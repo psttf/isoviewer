@@ -67,21 +67,21 @@ namespace Ps.Iso.Viewer
 				}
 				else
 				{
-					IsoFileForm.PrintError("Введите хотя бы один номер");
+					Helper.ReportError("Введите хотя бы один номер");
 				}
 			}
 			catch (FormatException)
 			{
-				IsoFileForm.PrintError("Неверно введен номер");
+				Helper.ReportError("Неверно введен номер");
 			}
 			catch (OverflowException)
 			{
-				IsoFileForm.PrintError("Номера должны быть в диапазоне от 0 до "
+				Helper.ReportError("Номера должны быть в диапазоне от 0 до "
 					+ _isoFile.Records.Count + " включительно");
 			}
 			catch (Exception exception)
 			{
-				IsoFileForm.PrintError(exception.Message);
+				Helper.ReportError(exception.Message);
 			}
 		}
 

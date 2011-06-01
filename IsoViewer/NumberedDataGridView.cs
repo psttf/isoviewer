@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -37,6 +39,15 @@ namespace Ps.Iso.Viewer {
           SystemBrushes.ControlText,
           e.RowBounds.Location.X + 15,
           e.RowBounds.Location.Y + ((e.RowBounds.Height - sz.Height) / 2));
+    }
+
+    public IEnumerable<DataGridViewRow> ContentRows {
+      get
+      {
+        if (!AllowUserToAddRows) return Rows.OfType<DataGridViewRow>();
+        return Rows.OfType<DataGridViewRow>().
+          Where(row => row != Rows[Rows.Count - 1]);
+      }
     }
   }
 }
