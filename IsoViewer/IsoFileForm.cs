@@ -232,7 +232,7 @@ namespace Ps.Iso.Viewer {
       this._btFind.Location = new System.Drawing.Point(113, 0);
       this._btFind.Name = "_btFind";
       this._btFind.Size = new System.Drawing.Size(75, 20);
-      this._btFind.TabIndex = 13;
+      this._btFind.TabIndex = 14;
       this._btFind.Text = "Найти";
       this._btFind.UseVisualStyleBackColor = true;
       this._btFind.Click += new System.EventHandler(this.btFind_Click);
@@ -243,7 +243,7 @@ namespace Ps.Iso.Viewer {
       this._tbSearchKey.Location = new System.Drawing.Point(46, 0);
       this._tbSearchKey.Name = "_tbSearchKey";
       this._tbSearchKey.Size = new System.Drawing.Size(61, 20);
-      this._tbSearchKey.TabIndex = 15;
+      this._tbSearchKey.TabIndex = 13;
       // 
       // _label5
       // 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,13 +18,18 @@ namespace Ps.Iso.Viewer {
     public TaskProcessWindow(Action<Action<int>> action, string title) {
       Init();
       _task = new Task(() => action(SetProgress), _tokenSource.Token);
-      _task.ContinueWith(t =>  {
-        if (pbProcessProgress.InvokeRequired)
-        {
+      _task.ContinueWith(t => {
+        var message = "";
+        if (t.Exception == null) return;
+        message = t.Exception.InnerExceptions.Aggregate(message,
+          (current, innerException) =>
+            current + (innerException.Message + "\n"));
+        Helper.ReportError(message);
+      }, TaskContinuationOptions.OnlyOnFaulted);
+      _task.ContinueWith(t => {
+        if (pbProcessProgress.InvokeRequired) {
           this.InvokeEx(Close);
-        }
-        else
-        {
+        } else {
           Close();
         }
       });

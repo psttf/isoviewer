@@ -185,7 +185,7 @@
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
-    <Compile Include="NumberedDataGridView.cs">
+    <Compile Include="ContentDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TaskProcessWindow.cs">

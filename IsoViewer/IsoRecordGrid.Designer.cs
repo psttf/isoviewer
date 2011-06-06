@@ -28,7 +28,7 @@ namespace Ps.Iso.Viewer
 		/// </summary>
 		private void InitializeComponent()
 		{
-      this.gridFields = new Ps.Iso.Viewer.NumberedDataGridView();
+      this.gridFields = new Ps.Iso.Viewer.ContentDataGridView();
       this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.colKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,7 +89,7 @@ namespace Ps.Iso.Viewer
 
 		#endregion
 
-    public NumberedDataGridView gridFields;
+    public ContentDataGridView gridFields;
     private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
     private System.Windows.Forms.DataGridViewTextBoxColumn colKey;
     private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
