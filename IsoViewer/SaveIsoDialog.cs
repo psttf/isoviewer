@@ -5,12 +5,12 @@ using System.Windows.Forms;
 
 namespace Ps.Iso.Viewer {
   public partial class SaveIsoDialog : Form {
-    private readonly IsoFile _isoFile;
+    private readonly IsoFileForm _isoFileForm;
 
-    public SaveIsoDialog(IsoFile isoFile) {
+    public SaveIsoDialog(IsoFileForm isoFileForm) {
       InitializeComponent();
 
-      _isoFile = isoFile;
+      _isoFileForm = isoFileForm;
     }
 
     private void btBrowse_Click(object sender, EventArgs e) {
@@ -28,17 +28,21 @@ namespace Ps.Iso.Viewer {
       try {
         Action<Action<int>> task;
         if (rbSaveAll.Checked) {
-          task = a => _isoFile.Save(tbPath.Text, a);
+          task = a => _isoFileForm.CurrentIsoFile.Save(tbPath.Text, a);
           SaveAndClose(task);
         } else if (!string.IsNullOrEmpty(tbRecordNumbers.Text)) {
           var strs = tbRecordNumbers.Text.Split(new[] { ',' });
           recNums = new List<int>(strs.Length);
-          foreach (var num in strs.Select(t => Convert.ToInt32(t))) {
-            if ((num >= 0) && (num <= _isoFile.Records.Count)) {
-              recNums.Add(num);
-            } else {
-              throw new OverflowException();
-            }
+          foreach (
+            var num in strs.Where(s => s.Trim() != "").
+              Select(t => Convert.ToInt32(t) - 1)
+          ) {
+            if ((num >= 0) &&
+              (num <= _isoFileForm.CurrentIsoFile.Records.Count)) {
+                recNums.Add(num);
+              } else {
+                throw new OverflowException();
+              }
           }
 
           if (string.IsNullOrEmpty(tbPath.Text)) {
@@ -46,8 +50,10 @@ namespace Ps.Iso.Viewer {
           }
 
           if (rbSaveAllExceptSelected.Checked)
-            task = a => _isoFile.SaveExcept(tbPath.Text, recNums, a);
-          else task = a => _isoFile.SaveOnly(tbPath.Text, recNums, a);
+            task = a => _isoFileForm.CurrentIsoFile.
+              SaveExcept(tbPath.Text, recNums, a);
+          else task = a => _isoFileForm.CurrentIsoFile.
+            SaveOnly(tbPath.Text, recNums, a);
           SaveAndClose(task);
         } else {
           Helper.ReportError("Введите хотя бы один номер");
@@ -55,8 +61,8 @@ namespace Ps.Iso.Viewer {
       } catch (FormatException) {
         Helper.ReportError("Неверно введен номер");
       } catch (OverflowException) {
-        Helper.ReportError("Номера должны быть в диапазоне от 0 до "
-          + _isoFile.Records.Count + " включительно");
+        Helper.ReportError("Номера должны быть в диапазоне от 1 до "
+          + _isoFileForm.CurrentIsoFile.Records.Count + " включительно");
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }
@@ -64,6 +70,7 @@ namespace Ps.Iso.Viewer {
 
     private void SaveAndClose(Action<Action<int>> task) {
       new TaskProcessWindow(task, "Сохранение").ShowDialog();
+      _isoFileForm.UnsavedChanges = false;
       Close();
     }
 
@@ -93,6 +100,13 @@ namespace Ps.Iso.Viewer {
 
     private void SaveIsoDialog_Shown(object sender, EventArgs e) {
       UpdateTbRecordNumbersEnabled();
+    }
+
+    internal void SetSaveExcept(IEnumerable<int> numbers) {
+      rbSaveAllExceptSelected.Checked = true;
+      tbRecordNumbers.Text = numbers.Aggregate("", (s, n) =>
+        s + (n+1).ToString() + ", "
+      );
     }
   }
 }

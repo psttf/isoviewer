@@ -130,9 +130,9 @@
     <Reference Include="pnunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="PsIso, Version=2.0.4174.17210, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PsIso, Version=2.0.4174.40771, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PsIso.2.0.4174.17210\lib\net40-Client\PsIso.dll</HintPath>
+      <HintPath>..\packages\PsIso.2.0.4174.40771\lib\net40-Client\PsIso.dll</HintPath>
     </Reference>
     <Reference Include="PsWinControls">
       <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
@@ -177,6 +177,9 @@
     <Compile Include="EditRecordDialog.cs" />
     <Compile Include="EditRecordDialog.Designer.cs">
       <DependentUpon>EditRecordDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditValueDialog.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="ErrorsListDialog.cs">
       <SubType>Form</SubType>
@@ -246,6 +249,9 @@
     <EmbeddedResource Include="EditRecordDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>EditRecordDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditValueDialog.resx">
+      <DependentUpon>EditValueDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ErrorsListDialog.resx">
       <SubType>Designer</SubType>
@@ -349,27 +355,7 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
-    <PublishFile Include="comments\ChangeLog.txt">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
     <PublishFile Include="comments\NOTES.txt">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-    <PublishFile Include="comments\SRS.txt">
       <Visible>False</Visible>
       <Group>
       </Group>

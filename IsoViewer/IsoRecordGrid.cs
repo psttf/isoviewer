@@ -9,7 +9,7 @@ using System.Collections;
 namespace Ps.Iso.Viewer
 {
 	public partial class IsoRecordGrid : UserControl {
-	  public bool WasEdited { get; private set; }
+	  public bool WasEdited { get; set; }
 
     public IsoRecordGrid() {
       InitializeComponent();
@@ -111,7 +111,8 @@ namespace Ps.Iso.Viewer
       object sender,
       DataGridViewCellEventArgs e
     ) {
-      WasEdited = true;
+      if (e.ColumnIndex == colKey.Index || e.ColumnIndex == colValue.Index)
+        WasEdited = true;
     }
 
     private void gridFields_DefaultValuesNeeded(
@@ -198,6 +199,30 @@ namespace Ps.Iso.Viewer
           break;
       }
       gridFields.Rows[rowIndex].Cells[ColKeyId].ErrorText = message;
+    }
+
+    private void gridFields_CellClick(
+      object sender, DataGridViewCellEventArgs e
+    ) {
+      // Ignore clicks that are not on button cells. 
+      if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
+      var cell = gridFields[colValue.Name, e.RowIndex];
+      var dlg = new EditValueDialog((string) cell.Value);
+      if (dlg.ShowDialog() == DialogResult.OK) cell.Value = dlg.Value;
+    }
+
+    private void gridFields_CellMouseEnter(
+      object sender, DataGridViewCellEventArgs e
+    ) {
+      if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
+      gridFields[colExpand.Index, e.RowIndex] =
+        new DataGridViewButtonCell { Value = "+" };
+    }
+
+    private void gridFields_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
+      if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
+      gridFields[colExpand.Index, e.RowIndex] =
+        new DataGridViewTextBoxCell();
     }
 	}
 }

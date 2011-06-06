@@ -132,4 +132,22 @@
 	<data name="IvApplication_Main_NoAcces">
 		<value xml:space="preserve">Нет разрешения на доступ к файлам. Возможно, это вызвано тем, что приложение запущено с сетевого диска. Попробуйте запустить приложение с локального диска.</value>
 	</data>
+	<data name="EditValueDialog_InitializeComponent_btCancel">
+		<value xml:space="preserve">Отмена</value>
+	</data>
+	<data name="EditValueDialog_InitializeComponent_Text">
+		<value xml:space="preserve">Редактирование поля</value>
+	</data>
+	<data name="EditValueDialog_InitializeComponent_OK">
+		<value xml:space="preserve">OK</value>
+	</data>
+	<data name="IsoFileForm_IsoFileForm_NewFile">
+		<value xml:space="preserve">Новый файл</value>
+	</data>
+	<data name="IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges">
+		<value xml:space="preserve">Изменения не были сохранены. Вы действительно хотите выйти?</value>
+	</data>
+	<data name="IsoFileForm_IsoFileForm_FormClosing_Warning">
+		<value xml:space="preserve">Предупреждение</value>
+	</data>
 </root>

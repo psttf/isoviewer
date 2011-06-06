@@ -61,11 +61,65 @@ namespace Ps.Iso.Viewer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Отмена.
+        /// </summary>
+        internal static string EditValueDialog_InitializeComponent_btCancel {
+            get {
+                return ResourceManager.GetString("EditValueDialog_InitializeComponent_btCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        internal static string EditValueDialog_InitializeComponent_OK {
+            get {
+                return ResourceManager.GetString("EditValueDialog_InitializeComponent_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Редактирование поля.
+        /// </summary>
+        internal static string EditValueDialog_InitializeComponent_Text {
+            get {
+                return ResourceManager.GetString("EditValueDialog_InitializeComponent_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to файлы ISO|*.iso|Все файлы|*.*.
         /// </summary>
         internal static string IsoFileFilter {
             get {
                 return ResourceManager.GetString("IsoFileFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Изменения не были сохранены. Вы действительно хотите выйти?.
+        /// </summary>
+        internal static string IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges {
+            get {
+                return ResourceManager.GetString("IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предупреждение.
+        /// </summary>
+        internal static string IsoFileForm_IsoFileForm_FormClosing_Warning {
+            get {
+                return ResourceManager.GetString("IsoFileForm_IsoFileForm_FormClosing_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новый файл.
+        /// </summary>
+        internal static string IsoFileForm_IsoFileForm_NewFile {
+            get {
+                return ResourceManager.GetString("IsoFileForm_IsoFileForm_NewFile", resourceCulture);
             }
         }
         

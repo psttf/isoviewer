@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security.Permissions;
 
 //
 // General Information about an assembly is controlled through the following 
@@ -27,7 +25,7 @@ using System.Security.Permissions;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.8.*")]
+[assembly: AssemblyVersion("2.3.*")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 

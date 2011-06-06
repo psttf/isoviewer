@@ -32,6 +32,7 @@ namespace Ps.Iso.Viewer
       this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.colKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.colExpand = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.gridFields)).BeginInit();
       this.SuspendLayout();
       // 
@@ -41,13 +42,17 @@ namespace Ps.Iso.Viewer
       this.gridFields.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
             this.colKey,
-            this.colValue});
+            this.colValue,
+            this.colExpand});
       this.gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
       this.gridFields.Location = new System.Drawing.Point(0, 0);
       this.gridFields.Name = "gridFields";
       this.gridFields.RowHeadersVisible = false;
       this.gridFields.Size = new System.Drawing.Size(150, 150);
       this.gridFields.TabIndex = 22;
+      this.gridFields.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFields_CellClick);
+      this.gridFields.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFields_CellMouseEnter);
+      this.gridFields.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFields_CellMouseLeave);
       this.gridFields.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridFields_CellValidating);
       this.gridFields.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFields_CellValueChanged);
       this.gridFields.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFields_DefaultValuesNeeded);
@@ -75,6 +80,15 @@ namespace Ps.Iso.Viewer
       this.colValue.Name = "colValue";
       this.colValue.Width = 700;
       // 
+      // colExpand
+      // 
+      this.colExpand.HeaderText = "";
+      this.colExpand.Name = "colExpand";
+      this.colExpand.ReadOnly = true;
+      this.colExpand.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.colExpand.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+      this.colExpand.Width = 23;
+      // 
       // IsoRecordGrid
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -93,5 +107,6 @@ namespace Ps.Iso.Viewer
     private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
     private System.Windows.Forms.DataGridViewTextBoxColumn colKey;
     private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
+    private System.Windows.Forms.DataGridViewTextBoxColumn colExpand;
 	}
 }

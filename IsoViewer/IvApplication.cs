@@ -7,13 +7,14 @@ namespace Ps.Iso.Viewer
 {
 	public class IvApplication
 	{
-	  /// <summary>
+   
+    /// <summary>
 		/// The main entry point for the application.
 		/// </summary>
 		[STAThread]
 		static void Main(string[] args) 
 		{
-			try
+      try
 			{
 				new FileIOPermission(PermissionState.Unrestricted).Demand();
 				string fileName = null;
