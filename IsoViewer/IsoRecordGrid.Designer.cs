@@ -48,6 +48,7 @@ namespace Ps.Iso.Viewer
       this.gridFields.RowHeadersVisible = false;
       this.gridFields.Size = new System.Drawing.Size(150, 150);
       this.gridFields.TabIndex = 22;
+      this.gridFields.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.gridFields_CellValidating);
       this.gridFields.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridFields_CellValueChanged);
       this.gridFields.DefaultValuesNeeded += new System.Windows.Forms.DataGridViewRowEventHandler(this.gridFields_DefaultValuesNeeded);
       this.gridFields.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.gridFields_SortCompare);

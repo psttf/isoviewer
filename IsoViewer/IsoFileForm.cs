@@ -547,10 +547,10 @@ namespace Ps.Iso.Viewer {
         Helper.ReportError("Запись должна содержать хотя бы одно поле");
         _gridFields.EditNewRecord();
         return false;
-      } catch (EmptyFieldNameException e) {
-        Helper.ReportError(string.
-          Format("Ключ поля не должен быть пустым (поле №{0})", e.FieldIndex));
-        _gridFields.EditFieldKey(e.FieldIndex);
+      } catch (IsoRecordValidationFailedException e) {
+        Helper.ReportError("Запись сожержит ошибки");
+        foreach (var error in e.Errors)
+          _gridFields.MarkFieldKey(error.FieldIndex, error.Type);
         return false;
       }
     }
@@ -578,7 +578,7 @@ namespace Ps.Iso.Viewer {
 
     private void btJump_Click(object sender, EventArgs e) {
       try {
-        int val = Convert.ToInt32(_tbCurRecNum.Text);
+        var val = Convert.ToInt32(_tbCurRecNum.Text);
         int newRecNum;
         if (val < 0) {
           newRecNum = 0;
@@ -622,7 +622,7 @@ namespace Ps.Iso.Viewer {
     public new void Show() {
       try {
         _isoFile = IsoFile.Load(_filename);
-        _lblRecordCount.Text = _isoFile.Records.Count.ToString();
+        UpdateRecordCount();
 
         _highlightedFields = null;
         GoToRecord(0);
@@ -631,6 +631,11 @@ namespace Ps.Iso.Viewer {
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }
+    }
+
+    private void UpdateRecordCount()
+    {
+      _lblRecordCount.Text = _isoFile.Records.Count.ToString();
     }
 
     private void miSave_Click(object sender, EventArgs e) {
@@ -706,11 +711,13 @@ namespace Ps.Iso.Viewer {
       _isoFile.Records.Insert(index, new IsoRecord());
       GoToRecord(index);
       _gridFields.EditNewRecord();
+      UpdateRecordCount();
     }
 
     private void _btDelete_Click(object sender, EventArgs e) {
       _isoFile.Records.RemoveAt(_currentRecordIndex);
       GoToRecord(_currentRecordIndex);
+      UpdateRecordCount();
     }
 
     //private void miSaveAsRdf_Click(object sender, EventArgs e)

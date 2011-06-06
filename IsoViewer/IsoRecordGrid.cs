@@ -29,7 +29,7 @@ namespace Ps.Iso.Viewer
         fields.AddRange(
           from DataGridViewRow row in gridFields.ContentRows
           orderby GetFieldIndex(row)
-          select new IsoRecordField((string)row.Cells["colKey"].Value,
+          select new IsoRecordField((string)row.Cells[ColKeyId].Value,
             (string)row.Cells["colValue"].Value)
         );
         return new IsoRecord(fields);
@@ -71,6 +71,7 @@ namespace Ps.Iso.Viewer
     }
 
 		private bool _enableEdit;
+	  private const string ColKeyId = "colKey";
 	  public const string ColNumberId = "colNumber";
 
 		public bool EnableEdit
@@ -156,8 +157,47 @@ namespace Ps.Iso.Viewer
     }
 
     private void BeginEditKey(DataGridViewRow row) {
-      gridFields.CurrentCell = row.Cells["colKey"];
+      gridFields.CurrentCell = row.Cells[ColKeyId];
       gridFields.BeginEdit(true);
     }
-  }
+
+    public void MarkFieldKey(
+      int fieldIndex, IsoRecordValidationErrorType errorType
+    ) {
+      for (var i=0; i<gridFields.ContentRows.Count(); i++) {
+        var row = gridFields.ContentRows.ElementAt(i);
+        if (GetFieldIndex(row) == fieldIndex)
+          MarkKeyCell(i,errorType);
+      }
+	  }
+
+    private void gridFields_CellValidating(
+      object sender, DataGridViewCellValidatingEventArgs e
+    ) {
+      var column = gridFields.Columns[e.ColumnIndex];
+      if (column.Name != ColKeyId) return;
+      var errorType = IsoRecord.ValidateFieldName((string) e.FormattedValue);
+      if (!errorType.HasValue)
+        gridFields.Rows[e.RowIndex].Cells[ColKeyId].ErrorText = null;
+      if (errorType != null) MarkKeyCell(e.RowIndex, errorType.Value);
+    }
+
+    private void MarkKeyCell(
+      int rowIndex, IsoRecordValidationErrorType errorType
+    ) {
+      string message;
+      switch (errorType) {
+        case IsoRecordValidationErrorType.EmptyFieldName:
+          message = "Название поля не должно быть пустым";
+          break;
+        case IsoRecordValidationErrorType.WrongFieldName:
+          message = "Название поля должно состоять из трех цифр";
+          break;
+        default:
+          message = "Неверный формат имени поля";
+          break;
+      }
+      gridFields.Rows[rowIndex].Cells[ColKeyId].ErrorText = message;
+    }
+	}
 }

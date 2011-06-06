@@ -32,13 +32,13 @@ namespace Ps.Iso.Viewer
       this.tbPath = new System.Windows.Forms.TextBox();
       this.btBrowse = new System.Windows.Forms.Button();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.rbSaveAll = new System.Windows.Forms.RadioButton();
       this.label2 = new System.Windows.Forms.Label();
       this.tbRecordNumbers = new System.Windows.Forms.TextBox();
       this.rbSaveAllExceptSelected = new System.Windows.Forms.RadioButton();
       this.rbSaveOnlySelected = new System.Windows.Forms.RadioButton();
       this.btCancel = new System.Windows.Forms.Button();
       this.btSave = new System.Windows.Forms.Button();
-      this.rbSaveAll = new System.Windows.Forms.RadioButton();
       this.groupBox1.SuspendLayout();
       this.SuspendLayout();
       // 
@@ -82,6 +82,19 @@ namespace Ps.Iso.Viewer
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "Сохранять";
       // 
+      // rbSaveAll
+      // 
+      this.rbSaveAll.AutoSize = true;
+      this.rbSaveAll.Checked = true;
+      this.rbSaveAll.Location = new System.Drawing.Point(6, 19);
+      this.rbSaveAll.Name = "rbSaveAll";
+      this.rbSaveAll.Size = new System.Drawing.Size(82, 17);
+      this.rbSaveAll.TabIndex = 4;
+      this.rbSaveAll.TabStop = true;
+      this.rbSaveAll.Text = "все записи";
+      this.rbSaveAll.UseVisualStyleBackColor = true;
+      this.rbSaveAll.CheckedChanged += new System.EventHandler(this.rbSaveAll_CheckedChanged);
+      // 
       // label2
       // 
       this.label2.AutoSize = true;
@@ -107,6 +120,7 @@ namespace Ps.Iso.Viewer
       this.rbSaveAllExceptSelected.TabIndex = 1;
       this.rbSaveAllExceptSelected.Text = "все кроме перечисленных";
       this.rbSaveAllExceptSelected.UseVisualStyleBackColor = true;
+      this.rbSaveAllExceptSelected.CheckedChanged += new System.EventHandler(this.rbSaveAllExceptSelected_CheckedChanged);
       // 
       // rbSaveOnlySelected
       // 
@@ -117,6 +131,7 @@ namespace Ps.Iso.Viewer
       this.rbSaveOnlySelected.TabIndex = 0;
       this.rbSaveOnlySelected.Text = "только перечисленные";
       this.rbSaveOnlySelected.UseVisualStyleBackColor = true;
+      this.rbSaveOnlySelected.CheckedChanged += new System.EventHandler(this.rbSaveOnlySelected_CheckedChanged);
       // 
       // btCancel
       // 
@@ -138,18 +153,6 @@ namespace Ps.Iso.Viewer
       this.btSave.UseVisualStyleBackColor = true;
       this.btSave.Click += new System.EventHandler(this.btSave_Click);
       // 
-      // rbSaveAll
-      // 
-      this.rbSaveAll.AutoSize = true;
-      this.rbSaveAll.Checked = true;
-      this.rbSaveAll.Location = new System.Drawing.Point(6, 19);
-      this.rbSaveAll.Name = "rbSaveAll";
-      this.rbSaveAll.Size = new System.Drawing.Size(82, 17);
-      this.rbSaveAll.TabIndex = 4;
-      this.rbSaveAll.TabStop = true;
-      this.rbSaveAll.Text = "все записи";
-      this.rbSaveAll.UseVisualStyleBackColor = true;
-      // 
       // SaveIsoDialog
       // 
       this.AcceptButton = this.btSave;
@@ -165,6 +168,7 @@ namespace Ps.Iso.Viewer
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.Name = "SaveIsoDialog";
       this.Text = "Сохранение ISO-файла";
+      this.Shown += new System.EventHandler(this.SaveIsoDialog_Shown);
       this.groupBox1.ResumeLayout(false);
       this.groupBox1.PerformLayout();
       this.ResumeLayout(false);
