@@ -53,7 +53,7 @@ namespace Ps.Iso.Viewer {
     private ToolTip _toolTip;
 
     /// <summary>
-    /// Номер текущей записи
+    /// Номер текущей записи (нумерация с 0)
     /// </summary>
     private int _currentRecordIndex;
 
@@ -109,10 +109,16 @@ namespace Ps.Iso.Viewer {
       Font = Properties.Settings.Default.Font;
       EditOnEnter = Properties.Settings.Default.EditOnEnter;
 
-      _toolTip.SetToolTip(_btPrev, "Назад Ctrl+PgUp");
-      _toolTip.SetToolTip(_btNext, "Назад Ctrl+PgDn");
-      _toolTip.SetToolTip(_btnFirst, "Назад Ctrl+Home");
-      _toolTip.SetToolTip(_btnLast, "Назад Ctrl+End");
+      _toolTip.SetToolTip(_btJump, "Перейти к записи с указанным номером");
+
+      _toolTip.SetToolTip(_btPrev, "Предыдущая запись Ctrl+PgUp");
+      _toolTip.SetToolTip(_btNext, "Следующая запись Ctrl+PgDn");
+      _toolTip.SetToolTip(_btnFirst, "Первая запись Ctrl+Home");
+      _toolTip.SetToolTip(_btnLast, "Последняя запись Ctrl+End");
+
+      _toolTip.SetToolTip(_btInsertBefore, "Вставить запись перед текущей");
+      _toolTip.SetToolTip(_btInsertAfter, "Вставить запись после текущей");
+      _toolTip.SetToolTip(_btDelete, "Удалить запись");
     }
 
     public override sealed string Text {
@@ -139,10 +145,9 @@ namespace Ps.Iso.Viewer {
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
-      Ps.Iso.IsoRecord isoRecord1 = new Ps.Iso.IsoRecord();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
+      Ps.Iso.IsoRecord isoRecord1 = new Ps.Iso.IsoRecord();
       this._splitContainer1 = new System.Windows.Forms.SplitContainer();
-      this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       this._panel3 = new System.Windows.Forms.Panel();
       this._tbQuery = new System.Windows.Forms.TextBox();
       this._panel5 = new System.Windows.Forms.Panel();
@@ -177,6 +182,7 @@ namespace Ps.Iso.Viewer {
       this._miSaveAs = new System.Windows.Forms.MenuItem();
       this._miSaveAsRdf = new System.Windows.Forms.MenuItem();
       this._toolTip = new System.Windows.Forms.ToolTip(this.components);
+      this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).BeginInit();
       this._splitContainer1.Panel1.SuspendLayout();
       this._splitContainer1.Panel2.SuspendLayout();
@@ -207,19 +213,9 @@ namespace Ps.Iso.Viewer {
       this._splitContainer1.Panel2.Controls.Add(this._panel7);
       this._splitContainer1.Panel2.Controls.Add(this._panel6);
       this._splitContainer1.Panel2Collapsed = true;
-      this._splitContainer1.Size = new System.Drawing.Size(692, 40);
+      this._splitContainer1.Size = new System.Drawing.Size(692, 153);
       this._splitContainer1.SplitterDistance = 25;
       this._splitContainer1.TabIndex = 0;
-      // 
-      // _gridFields
-      // 
-      this._gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._gridFields.EnableEdit = true;
-      this._gridFields.Location = new System.Drawing.Point(0, 28);
-      this._gridFields.Name = "_gridFields";
-      this._gridFields.Record = isoRecord1;
-      this._gridFields.Size = new System.Drawing.Size(692, 0);
-      this._gridFields.TabIndex = 22;
       // 
       // _panel3
       // 
@@ -227,7 +223,7 @@ namespace Ps.Iso.Viewer {
       this._panel3.Controls.Add(this._panel5);
       this._panel3.Controls.Add(this._panel2);
       this._panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this._panel3.Location = new System.Drawing.Point(0, 24);
+      this._panel3.Location = new System.Drawing.Point(0, 127);
       this._panel3.Name = "_panel3";
       this._panel3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 0);
       this._panel3.Size = new System.Drawing.Size(692, 26);
@@ -532,11 +528,22 @@ namespace Ps.Iso.Viewer {
       this._miSaveAsRdf.Text = "Сохранить в формате RDF...";
       this._miSaveAsRdf.Visible = false;
       // 
+      // _gridFields
+      // 
+      this._gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._gridFields.EnableEdit = true;
+      this._gridFields.Location = new System.Drawing.Point(0, 28);
+      this._gridFields.Name = "_gridFields";
+      this._gridFields.Record = isoRecord1;
+      this._gridFields.Size = new System.Drawing.Size(692, 99);
+      this._gridFields.TabIndex = 22;
+      this._gridFields.WasEdited = false;
+      // 
       // IsoFileForm
       // 
       this.AcceptButton = this._btJump;
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-      this.ClientSize = new System.Drawing.Size(692, 40);
+      this.ClientSize = new System.Drawing.Size(692, 153);
       this.Controls.Add(this._splitContainer1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Menu = this._mainMenu1;
@@ -621,10 +628,9 @@ namespace Ps.Iso.Viewer {
     }
 
     private void GoToPrevious() {
-      if (_currentRecordIndex > 0) {
-        _highlightedFields = null;
-        GoToRecord(_currentRecordIndex - 1);
-      }
+      if (_currentRecordIndex <= 0) return;
+      _highlightedFields = null;
+      GoToRecord(_currentRecordIndex - 1);
     }
 
     private void btJump_Click(object sender, EventArgs e) {
@@ -660,7 +666,7 @@ namespace Ps.Iso.Viewer {
       }
       foreach (var result in _searchResults) {
         _lvSearchResults.Items.
-          Add(new ListViewItem(new[] {result.RecordNumber.ToString(),
+          Add(new ListViewItem(new[] {(result.RecordNumber + 1).ToString(),
                                       result.FieldNumbers.Count.ToString()}));
       }
       _splitContainer1.Panel2Collapsed = false;
@@ -686,7 +692,9 @@ namespace Ps.Iso.Viewer {
     }
 
     private void UpdateRecordCount() {
-      _lblRecordCount.Text = _isoFile.Records.Count.ToString();
+      var cnt = _isoFile.Records.Count;
+      _lblRecordCount.Text = cnt.ToString();
+      _btDelete.Enabled = cnt > 1;
     }
 
     private void miSaveAs_Click(object sender, EventArgs e) {
@@ -780,7 +788,8 @@ namespace Ps.Iso.Viewer {
 
     private void _btDelete_Click(object sender, EventArgs e) {
       _isoFile.Records.RemoveAt(_currentRecordIndex);
-      GoToRecord(_currentRecordIndex);
+      if (_currentRecordIndex > 0) GoToRecord(_currentRecordIndex - 1);
+      else GoToRecord(_currentRecordIndex);
       UpdateRecordCount();
       UnsavedChanges = true;
     }

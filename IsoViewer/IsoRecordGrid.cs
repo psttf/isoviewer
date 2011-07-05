@@ -42,7 +42,7 @@ namespace Ps.Iso.Viewer
         var sortDirection = gridFields.SortOrder;
         for (var i = 0; i < value.Fields.Count; i++) {
           var field = value.Fields[i];
-          gridFields.Rows.Add(new object[] {i, field.Name, field.Value});
+          gridFields.Rows.Add(new object[] {i+1, field.Name, field.Value});
         }
 
         if (sortColumn != null && sortDirection != SortOrder.None)
@@ -119,7 +119,7 @@ namespace Ps.Iso.Viewer
       object sender,
       DataGridViewRowEventArgs e
     ) {
-      SetFieldIndex(e.Row, gridFields.ContentRows.Count());
+      SetFieldIndex(e.Row, gridFields.ContentRows.Count() + 1);
     }
 
     private void gridFields_UserDeletedRow(
@@ -160,6 +160,7 @@ namespace Ps.Iso.Viewer
     private void BeginEditKey(DataGridViewRow row) {
       gridFields.CurrentCell = row.Cells[ColKeyId];
       gridFields.BeginEdit(true);
+      WasEdited = true;
     }
 
     public void MarkFieldKey(
