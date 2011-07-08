@@ -155,9 +155,10 @@ namespace Ps.Iso.Viewer {
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
       Ps.Iso.IsoRecord isoRecord1 = new Ps.Iso.IsoRecord();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
       this._splitContainer1 = new System.Windows.Forms.SplitContainer();
+      this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       this._panel3 = new System.Windows.Forms.Panel();
       this._tbQuery = new System.Windows.Forms.TextBox();
       this._panel5 = new System.Windows.Forms.Panel();
@@ -192,7 +193,6 @@ namespace Ps.Iso.Viewer {
       this._miSaveAs = new System.Windows.Forms.MenuItem();
       this._miSaveAsRdf = new System.Windows.Forms.MenuItem();
       this._toolTip = new System.Windows.Forms.ToolTip(this.components);
-      this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).BeginInit();
       this._splitContainer1.Panel1.SuspendLayout();
       this._splitContainer1.Panel2.SuspendLayout();
@@ -226,6 +226,17 @@ namespace Ps.Iso.Viewer {
       this._splitContainer1.Size = new System.Drawing.Size(692, 153);
       this._splitContainer1.SplitterDistance = 25;
       this._splitContainer1.TabIndex = 0;
+      // 
+      // _gridFields
+      // 
+      this._gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._gridFields.EnableEdit = true;
+      this._gridFields.Location = new System.Drawing.Point(0, 28);
+      this._gridFields.Name = "_gridFields";
+      this._gridFields.Record = isoRecord1;
+      this._gridFields.Size = new System.Drawing.Size(692, 99);
+      this._gridFields.TabIndex = 22;
+      this._gridFields.WasEdited = false;
       // 
       // _panel3
       // 
@@ -537,17 +548,6 @@ namespace Ps.Iso.Viewer {
       this._miSaveAsRdf.Index = 3;
       this._miSaveAsRdf.Text = "Сохранить в формате RDF...";
       this._miSaveAsRdf.Visible = false;
-      // 
-      // _gridFields
-      // 
-      this._gridFields.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._gridFields.EnableEdit = true;
-      this._gridFields.Location = new System.Drawing.Point(0, 28);
-      this._gridFields.Name = "_gridFields";
-      this._gridFields.Record = isoRecord1;
-      this._gridFields.Size = new System.Drawing.Size(692, 99);
-      this._gridFields.TabIndex = 22;
-      this._gridFields.WasEdited = false;
       // 
       // IsoFileForm
       // 

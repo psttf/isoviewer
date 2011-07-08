@@ -18,6 +18,14 @@ namespace Ps.Iso.Viewer
       set { _tbValue.Text = value; }
     }
 
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+      switch (keyData) {
+        case (Keys.Control | Keys.Enter):
+          return true;
+        default: return false;
+      }
+    }
+
     #region Windows Form Designer generated code
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditValueDialog));
@@ -61,6 +69,8 @@ namespace Ps.Iso.Viewer
       // 
       // EditValueDialog
       // 
+      this.AcceptButton = this._btOK;
+      this.CancelButton = this._btCancel;
       this.ClientSize = new System.Drawing.Size(473, 287);
       this.Controls.Add(this._btCancel);
       this.Controls.Add(this._btOK);
