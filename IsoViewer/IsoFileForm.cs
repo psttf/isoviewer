@@ -101,6 +101,8 @@ namespace Ps.Iso.Viewer {
       Text = Global.IsoFileForm_IsoFileForm_NewFile;
 
       MdiParent = parentForm;
+
+      _gridFields.EditNewRecord();
     }
 
     private void Init()
@@ -119,6 +121,14 @@ namespace Ps.Iso.Viewer {
       _toolTip.SetToolTip(_btInsertBefore, "Вставить запись перед текущей");
       _toolTip.SetToolTip(_btInsertAfter, "Вставить запись после текущей");
       _toolTip.SetToolTip(_btDelete, "Удалить запись");
+
+      try {
+        UpdateRecordCount();
+        _highlightedFields = null;
+        RememberChangesAndGoToRecord(0);
+      } catch (Exception exception) {
+        Helper.ReportError(exception.Message);
+      }
     }
 
     public override sealed string Text {
@@ -578,14 +588,12 @@ namespace Ps.Iso.Viewer {
     /// <param name="recNum">номер записи</param>
     private void GoToRecord(int recNum) {
       try {
-        if (!RememberChanges()) return;
-
         var record = _isoFile.Records[recNum];
         _gridFields.Record = record;
         _gridFields.HighlightFields(_highlightedFields);
 
         _currentRecordIndex = recNum;
-        _tbCurRecNum.Text = (_currentRecordIndex+1).ToString();
+        _tbCurRecNum.Text = (_currentRecordIndex + 1).ToString();
         _btNext.Enabled = _currentRecordIndex != _isoFile.Records.Count - 1;
         _btPrev.Enabled = _currentRecordIndex != 0;
       } catch (Exception exception) {
@@ -593,6 +601,17 @@ namespace Ps.Iso.Viewer {
       }
     }
 
+    private void RememberChangesAndGoToRecord(int recNum) {
+      if (!RememberChanges()) return;
+      GoToRecord(recNum);
+    }
+
+    /// <summary>
+    /// Сохраняет изменения в текущей записи. Если запись содержит ошибки,
+    /// выводит соответствующие сообщения
+    /// </summary>
+    /// <returns>true, если запись сохранена,
+    /// false -- в обратном случае</returns>
     private bool RememberChanges() {
       if (!_gridFields.WasEdited) return true;
       try {
@@ -620,7 +639,7 @@ namespace Ps.Iso.Viewer {
     private void GoToNext() {
       if (_currentRecordIndex >= _isoFile.Records.Count - 1) return;
       _highlightedFields = null;
-      GoToRecord(_currentRecordIndex + 1);
+      RememberChangesAndGoToRecord(_currentRecordIndex + 1);
     }
 
     private void btPrev_Click(object sender, EventArgs e) {
@@ -630,7 +649,7 @@ namespace Ps.Iso.Viewer {
     private void GoToPrevious() {
       if (_currentRecordIndex <= 0) return;
       _highlightedFields = null;
-      GoToRecord(_currentRecordIndex - 1);
+      RememberChangesAndGoToRecord(_currentRecordIndex - 1);
     }
 
     private void btJump_Click(object sender, EventArgs e) {
@@ -645,7 +664,7 @@ namespace Ps.Iso.Viewer {
           newRecNum = val;
         }
         _highlightedFields = null;
-        GoToRecord(newRecNum);
+        RememberChangesAndGoToRecord(newRecNum);
       } catch {
         Helper.ReportError("Введите число!");
       }
@@ -675,20 +694,8 @@ namespace Ps.Iso.Viewer {
     private void lvSearchResults_ItemActivate(object sender, EventArgs e) {
       _highlightedFields = _searchResults[_lvSearchResults.SelectedIndices[0]].
         FieldNumbers;
-      GoToRecord(_searchResults[_lvSearchResults.SelectedIndices[0]].
+      RememberChangesAndGoToRecord(_searchResults[_lvSearchResults.SelectedIndices[0]].
         RecordNumber);
-    }
-
-    public new void Show() {
-      try {
-        UpdateRecordCount();
-        _highlightedFields = null;
-        GoToRecord(0);
-
-        base.Show();
-      } catch (Exception exception) {
-        Helper.ReportError(exception.Message);
-      }
     }
 
     private void UpdateRecordCount() {
@@ -708,7 +715,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void GoToHome() {
-      GoToRecord(0);
+      RememberChangesAndGoToRecord(0);
     }
 
     private void btnLast_Click(object sender, EventArgs e) {
@@ -716,7 +723,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void GoToEnd() {
-      GoToRecord(_isoFile.Records.Count - 1);
+      RememberChangesAndGoToRecord(_isoFile.Records.Count - 1);
     }
 
     private void IsoFileForm_FormClosing(
@@ -771,14 +778,15 @@ namespace Ps.Iso.Viewer {
 
     private void _btInsertBefore_Click(object sender, EventArgs e)
     {
-      InsertNewRecord(_currentRecordIndex);
+      InsertNewRecordAt(_currentRecordIndex);
     }
 
     private void _btInsertAfter_Click(object sender, EventArgs e) {
-      InsertNewRecord(_currentRecordIndex + 1);
+      InsertNewRecordAt(_currentRecordIndex + 1);
     }
 
-    private void InsertNewRecord(int index) {
+    private void InsertNewRecordAt(int index) {
+      if (!RememberChanges()) return;
       _isoFile.Records.Insert(index, new IsoRecord());
       GoToRecord(index);
       _gridFields.EditNewRecord();
@@ -788,8 +796,8 @@ namespace Ps.Iso.Viewer {
 
     private void _btDelete_Click(object sender, EventArgs e) {
       _isoFile.Records.RemoveAt(_currentRecordIndex);
-      if (_currentRecordIndex > 0) GoToRecord(_currentRecordIndex - 1);
-      else GoToRecord(_currentRecordIndex);
+      if (_currentRecordIndex > 0) RememberChangesAndGoToRecord(_currentRecordIndex - 1);
+      else RememberChangesAndGoToRecord(_currentRecordIndex);
       UpdateRecordCount();
       UnsavedChanges = true;
     }
