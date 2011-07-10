@@ -150,4 +150,46 @@
 	<data name="IsoFileForm_IsoFileForm_FormClosing_Warning">
 		<value xml:space="preserve">Предупреждение</value>
 	</data>
+	<data name="IsoFileForm__miCheckFile_Text">
+		<value xml:space="preserve">Проверить на ошибки...</value>
+	</data>
+	<data name="IsoFileForm_Init_miShowScheme_Text">
+		<value xml:space="preserve">Просмотреть схему...</value>
+	</data>
+	<data name="IsoFileForm_Init_miSaveAs_Text">
+		<value xml:space="preserve">Сохранить как...</value>
+	</data>
+	<data name="IsoFileForm_Init_miSaveAsRdf_Text">
+		<value xml:space="preserve">Сохранить в формате RDF...</value>
+	</data>
+	<data name="IsoFileForm_Init_файлы_ISO_openFileDialog_Filter">
+		<value xml:space="preserve">файлы ISO|*.iso|Все файлы|*.*</value>
+	</data>
+	<data name="IsoFileForm_Init_openFileDialog_Title">
+		<value xml:space="preserve">Открытие файла</value>
+	</data>
+	<data name="IsoFileForm_Init_menuExit_Text">
+		<value xml:space="preserve">Выход</value>
+	</data>
+	<data name="IsoFileForm_Init_viewMenuItem_Text">
+		<value xml:space="preserve">Вид</value>
+	</data>
+	<data name="IsoFileForm_Init_miSelectFont_Text">
+		<value xml:space="preserve">Выбрать шрифт...</value>
+	</data>
+	<data name="IsoFileForm_Init_Кнопка_miShowOpenIsoFileButton_Text">
+		<value><![CDATA[Кнопка "Открыть ISO-файл"]]></value>
+	</data>
+	<data name="IsoFileForm_Init_miEditOnEnter_Text">
+		<value xml:space="preserve">Быстрое редактирование</value>
+	</data>
+	<data name="IsoFileForm_Init_miHelp_Text">
+		<value xml:space="preserve">Справка</value>
+	</data>
+	<data name="IsoFileForm_Init_miAbout_Text">
+		<value xml:space="preserve">О программе</value>
+	</data>
+	<data name="IsoFileForm_Init_btnOpenIsoFile_Text">
+		<value xml:space="preserve">Открыть ISO-файл</value>
+	</data>
 </root>

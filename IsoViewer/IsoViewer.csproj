@@ -121,6 +121,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -134,8 +135,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PsIso.2.0.4174.40771\lib\net40-Client\PsIso.dll</HintPath>
     </Reference>
-    <Reference Include="PsWinControls">
-      <HintPath>..\packages\PsWinControls.1.0.4161.33353\lib\net20\PsWinControls.dll</HintPath>
+    <Reference Include="PsWinControls, Version=1.1.4208.37438, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PsWinControls.1.1.4208.37438\lib\net20\PsWinControls.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -174,6 +176,9 @@
       <DependentUpon>AboutDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlExtensions.cs" />
+    <Compile Include="IsoFileForm.Designer.cs">
+      <DependentUpon>IsoFileForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditRecordDialog.cs" />
     <Compile Include="EditRecordDialog.Designer.cs">
       <DependentUpon>EditRecordDialog.cs</DependentUpon>
@@ -191,6 +196,10 @@
     <Compile Include="ContentDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="IsoFileFormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IvProgram.cs" />
     <Compile Include="TaskProcessWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,9 +222,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="IvApplication.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -257,6 +263,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ErrorsListDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IsoFileForm.ru.resx">
+      <DependentUpon>IsoFileForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskProcessWindow.resx">
       <DependentUpon>TaskProcessWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -273,10 +282,6 @@
     <EmbeddedResource Include="IsoRecordGrid.resx">
       <SubType>Designer</SubType>
       <DependentUpon>IsoRecordGrid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SaveIsoDialog.resx">
       <SubType>Designer</SubType>
