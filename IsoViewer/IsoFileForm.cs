@@ -465,11 +465,12 @@ namespace Ps.Iso.Viewer {
       Settings.Default.gridFields_SortDirection = _gridFields.gridFields.
         SortOrder.ToSortDirection();
       Settings.Default.Save();
-      if (UnsavedChanges || _gridFields.WasEdited) if (MessageBox.Show(this,
-        Global.IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges,
-          Global.IsoFileForm_IsoFileForm_FormClosing_Warning,
-            MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.No)
-              e.Cancel = true;
+      if (UnsavedChanges || (!FileIsNew && _gridFields.WasEdited) ||
+        NewFileWasEdited) if (MessageBox.Show(this,
+          Global.IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges,
+            Global.IsoFileForm_IsoFileForm_FormClosing_Warning,
+              MessageBoxButtons.YesNo,MessageBoxIcon.Warning)
+                == DialogResult.No) e.Cancel = true;
       else {
         CurrentIsoFile.Dispose();
       } else {
@@ -628,6 +629,17 @@ namespace Ps.Iso.Viewer {
       }
       InitializeFormData();
       _gridFields.EditNewRecord();
+      NewFileWasEdited = false;
+      _gridFields.gridFields.CellValueChanged += NewFileWasEditedEvent;
+    }
+
+    protected bool NewFileWasEdited { get; set; }
+
+    private void NewFileWasEditedEvent(
+      object sender, DataGridViewCellEventArgs e
+    ) {
+      NewFileWasEdited = true;
+      _gridFields.gridFields.CellValueChanged -= NewFileWasEditedEvent;
     }
 
     #region from MainForm

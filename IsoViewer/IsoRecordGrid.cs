@@ -171,7 +171,10 @@ namespace Ps.Iso.Viewer
     private void BeginEditKey(DataGridViewRow row) {
       gridFields.CurrentCell = row.Cells[ColKeyId];
       gridFields.BeginEdit(true);
-      //WasEdited = true;
+
+      // иначе при создании новой записи она не считается отредактированной
+      // и ее можно оставить пустой
+      WasEdited = true;
     }
 
     public void MarkFieldKey(
