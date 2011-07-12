@@ -58,10 +58,15 @@ namespace Ps.Iso.Viewer {
     {
       if (Settings.Default.BoundsSet) {
         // restore location and size of the form on the desktop
-        DesktopBounds = Settings.Default.Bounds;
+        Left = MoveRespectingOpenForms(Settings.Default.Bounds.X);
+        Top = MoveRespectingOpenForms(Settings.Default.Bounds.Y);
+        Height = Settings.Default.Bounds.Height;
+        Width = Settings.Default.Bounds.Width;
         // restore form's window state
-        WindowState = Settings.Default.WindowState;
-      } else {
+        WindowState = Settings.Default.WindowState != FormWindowState.Minimized
+                        ? Settings.Default.WindowState : FormWindowState.Normal;
+      }
+      else {
         StartPosition = FormStartPosition.WindowsDefaultBounds;
       }
       Height -= 20;
@@ -681,14 +686,18 @@ namespace Ps.Iso.Viewer {
     //}
 
     private void MainForm_FormClosing() {
-      Settings.Default.Bounds = DesktopBounds;
+      Settings.Default.Bounds = WindowState == FormWindowState.Maximized ?
+        RestoreBounds : DesktopBounds;
       Settings.Default.WindowState = WindowState;
-      // persist location ,size and window state of the form on the desktop
       Settings.Default.BoundsSet = true;
       Settings.Default.Save();
     }
    
     #endregion
+
+    private static int MoveRespectingOpenForms(int i) {
+      return i + 20 * IvApplication.CurrentApplication.OpenForms.Count;
+    }
   }
 
   public enum SaveMethod { All, Except, Only }
