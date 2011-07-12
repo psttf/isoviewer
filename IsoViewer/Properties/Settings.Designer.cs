@@ -73,12 +73,12 @@ namespace Ps.Iso.Viewer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public int openIsoFileDlg_FilterIndex {
+        public int saveIsoFileDlg_FilterIndex {
             get {
-                return ((int)(this["openIsoFileDlg_FilterIndex"]));
+                return ((int)(this["saveIsoFileDlg_FilterIndex"]));
             }
             set {
-                this["openIsoFileDlg_FilterIndex"] = value;
+                this["saveIsoFileDlg_FilterIndex"] = value;
             }
         }
         

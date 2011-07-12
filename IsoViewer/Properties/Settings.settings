@@ -14,7 +14,7 @@
     <Setting Name="WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
       <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="openIsoFileDlg_FilterIndex" Type="System.Int32" Scope="User">
+    <Setting Name="saveIsoFileDlg_FilterIndex" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="tbOpenIsoFile_Visible" Type="System.Boolean" Scope="User">

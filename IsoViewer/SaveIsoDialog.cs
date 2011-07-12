@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Ps.Iso.Viewer.Properties;
 
 namespace Ps.Iso.Viewer {
   public partial class SaveIsoDialog : Form {
@@ -16,11 +17,13 @@ namespace Ps.Iso.Viewer {
     private void btBrowse_Click(object sender, EventArgs e) {
       var dlg = new SaveFileDialog {
         DefaultExt = "iso",
-        Filter = Global.IsoFileFilter
+        Filter = Global.IsoFileFilter,
+        FilterIndex = Settings.Default.saveIsoFileDlg_FilterIndex
       };
-      if (dlg.ShowDialog() == DialogResult.OK) {
-        Filename = dlg.FileName;
-      }
+      if (dlg.ShowDialog() != DialogResult.OK) return;
+      Filename = dlg.FileName;
+      Settings.Default.saveIsoFileDlg_FilterIndex = dlg.FilterIndex;
+      Settings.Default.Save();
     }
 
     private void rbSaveAllExceptSelected_CheckedChanged(
