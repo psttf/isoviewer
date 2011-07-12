@@ -16,6 +16,7 @@ namespace Ps.Iso.Viewer {
     private ToolStripMenuItem _miCheckFile;
     private ToolStripMenuItem _miShowScheme;
     private ToolStripMenuItem _miSaveAs;
+    private ToolStripMenuItem _miSave;
     //private ToolStripMenuItem _miSaveAsRdf;
 
     #region from MainForm
@@ -81,6 +82,7 @@ namespace Ps.Iso.Viewer {
 
       _miCheckFile = new ToolStripMenuItem();
       _miShowScheme = new ToolStripMenuItem();
+      _miSave = new ToolStripMenuItem();
       _miSaveAs = new ToolStripMenuItem();
       //_miSaveAsRdf = new ToolStripMenuItem();
 
@@ -102,7 +104,7 @@ namespace Ps.Iso.Viewer {
       _miEditOnEnter.Checked = Settings.Default.EditOnEnter;
 
       fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
-        _miCheckFile, _miShowScheme, _miSaveAs,
+        _miCheckFile, _miShowScheme, _miSave, _miSaveAs,
         //_miSaveAsRdf,
         new ToolStripSeparator(),
         _menuExit
@@ -120,9 +122,15 @@ namespace Ps.Iso.Viewer {
       _miShowScheme.Text = Global.IsoFileForm_Init_miShowScheme_Text;
       _miShowScheme.Click += miShowScheme_Click;
       // 
+      // _miSave
+      // 
+      _miSave.MergeIndex = 2;
+      _miSave.Text = Global.IsoFileForm_Init_miSave_Text;
+      _miSave.Click += miSave_Click;
+      // 
       // _miSaveAs
       // 
-      _miSaveAs.MergeIndex = 2;
+      _miSaveAs.MergeIndex = 3;
       _miSaveAs.Text = Global.IsoFileForm_Init_miSaveAs_Text;
       _miSaveAs.Click += miSaveAs_Click;
       // 
@@ -243,6 +251,7 @@ namespace Ps.Iso.Viewer {
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }
+      UnsavedChanges = false;
     }
 
     /// <summary>
@@ -367,10 +376,37 @@ namespace Ps.Iso.Viewer {
       _btDelete.Enabled = cnt > 1;
     }
 
-    private void miSaveAs_Click(object sender, EventArgs e) {
+    private bool EndEditAndRememberChanges() {
       _gridFields.gridFields.EndEdit();
-      if (!RememberChanges()) return;
-      new SaveIsoDialog(this).ShowDialog();
+      return RememberChanges();
+    }
+
+    private void miSaveAs_Click(object sender, EventArgs e) {
+      if (!EndEditAndRememberChanges()) return;
+
+      var saveIsoDialog = new SaveIsoDialog(this);
+      if (saveIsoDialog.ShowDialog() != DialogResult.OK) return;
+
+      ExecuteSaveTask(saveIsoDialog.SaveTask, saveIsoDialog.Filename);
+    }
+
+    private void miSave_Click(object sender, EventArgs e) {
+      if (FileIsNew) miSaveAs_Click(sender, e);
+      else
+      {
+        if (!EndEditAndRememberChanges()) return;
+        ExecuteSaveTask(filename => a => CurrentIsoFile.Save(filename, a),
+                        FileName);
+      }
+    }
+
+    private void ExecuteSaveTask(
+      Func<string,Action<Action<int>>> task,
+      string fileName
+    ) {
+      new TaskProcessWindow(task(fileName), "Сохранение").ShowDialog();
+      CurrentIsoFile.Dispose();
+      OpenFile(fileName);
     }
 
     private void btnFirst_Click(object sender, EventArgs e) {

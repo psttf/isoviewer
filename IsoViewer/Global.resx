@@ -192,4 +192,7 @@
 	<data name="IsoFileForm_Init_btnOpenIsoFile_Text">
 		<value xml:space="preserve">Открыть ISO-файл</value>
 	</data>
+	<data name="IsoFileForm_Init_miSave_Text">
+		<value xml:space="preserve">Сохранить</value>
+	</data>
 </root>

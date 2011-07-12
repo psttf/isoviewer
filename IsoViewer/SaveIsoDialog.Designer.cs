@@ -135,13 +135,13 @@ namespace Ps.Iso.Viewer
       // 
       // btCancel
       // 
+      this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
       this.btCancel.Location = new System.Drawing.Point(351, 161);
       this.btCancel.Name = "btCancel";
       this.btCancel.Size = new System.Drawing.Size(75, 23);
       this.btCancel.TabIndex = 4;
       this.btCancel.Text = "Отменить";
       this.btCancel.UseVisualStyleBackColor = true;
-      this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
       // 
       // btSave
       // 
@@ -155,9 +155,9 @@ namespace Ps.Iso.Viewer
       // 
       // SaveIsoDialog
       // 
-      this.AcceptButton = this.btSave;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.CancelButton = this.btCancel;
       this.ClientSize = new System.Drawing.Size(438, 195);
       this.Controls.Add(this.btSave);
       this.Controls.Add(this.btCancel);

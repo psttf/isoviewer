@@ -11,7 +11,6 @@ namespace Ps.Iso.Viewer {
   partial class IsoFileForm {
     private IContainer components;
 
-    private IsoFile _isoFile;
     private SplitContainer _splitContainer1;
     private Panel _panel3;
     private TextBox _tbQuery;
