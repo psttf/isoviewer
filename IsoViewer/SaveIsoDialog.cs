@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Ps.Iso.Viewer.Properties;
@@ -14,11 +15,13 @@ namespace Ps.Iso.Viewer {
       _isoFileForm = isoFileForm;
     }
 
-    private void btBrowse_Click(object sender, EventArgs e) {
+    private void btBrowse_Click(object sender, EventArgs e)
+    {
       var dlg = new SaveFileDialog {
         DefaultExt = "iso",
         Filter = Global.IsoFileFilter,
-        FilterIndex = Settings.Default.saveIsoFileDlg_FilterIndex
+        FilterIndex = Settings.Default.saveIsoFileDlg_FilterIndex,
+        OverwritePrompt = false
       };
       if (dlg.ShowDialog() != DialogResult.OK) return;
       Filename = dlg.FileName;
@@ -78,15 +81,20 @@ namespace Ps.Iso.Viewer {
           }
           RecordNumbers = recNums;
 
-          if (string.IsNullOrEmpty(Filename)) {
+          if (string.IsNullOrEmpty(Filename))
             throw new Exception("Введите путь к файлу");
-          }
+          
 
           SaveMethod = rbSaveAllExceptSelected.Checked ?
             SaveMethod.Except : SaveMethod.Only;
         } else {
           Helper.ReportError("Введите хотя бы один номер");
         }
+        if (File.Exists(Filename))
+          if (MessageBox.Show(Global.SaveIsoDialog_btSave_OverwriteMessage,
+            Global.SaveIsoDialog_btSave_OverwriteCaption,
+              MessageBoxButtons.YesNo,MessageBoxIcon.Warning)
+                != DialogResult.Yes) return;
         DialogResult = DialogResult.OK;
       } catch (FormatException) {
         Helper.ReportError("Неверно введен номер");

@@ -171,7 +171,7 @@ namespace Ps.Iso.Viewer
     private void BeginEditKey(DataGridViewRow row) {
       gridFields.CurrentCell = row.Cells[ColKeyId];
       gridFields.BeginEdit(true);
-      WasEdited = true;
+      //WasEdited = true;
     }
 
     public void MarkFieldKey(
@@ -226,15 +226,22 @@ namespace Ps.Iso.Viewer
     private void gridFields_CellMouseEnter(
       object sender, DataGridViewCellEventArgs e
     ) {
-      if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
+      if (NotExpandableCell(e)) return;
       gridFields[colExpand.Index, e.RowIndex] =
         new DataGridViewButtonCell { Value = "+" };
     }
 
-    private void gridFields_CellMouseLeave(object sender, DataGridViewCellEventArgs e) {
-      if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
+	  private void gridFields_CellMouseLeave(
+      object sender, DataGridViewCellEventArgs e
+    ) {
+      if (NotExpandableCell(e)) return;
       gridFields[colExpand.Index, e.RowIndex] =
         new DataGridViewTextBoxCell();
     }
-	}
+
+    private bool NotExpandableCell(DataGridViewCellEventArgs e) {
+      return e.RowIndex < 0 || e.ColumnIndex == colNumber.Index ||
+             e.ColumnIndex == colKey.Index;
+    }
+  }
 }

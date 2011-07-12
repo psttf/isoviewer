@@ -286,6 +286,24 @@ namespace Ps.Iso.Viewer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Подтверждение перезаписи.
+        /// </summary>
+        internal static string SaveIsoDialog_btSave_OverwriteCaption {
+            get {
+                return ResourceManager.GetString("SaveIsoDialog_btSave_OverwriteCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Указанный файл уже существует. Заменить?.
+        /// </summary>
+        internal static string SaveIsoDialog_btSave_OverwriteMessage {
+            get {
+                return ResourceManager.GetString("SaveIsoDialog_btSave_OverwriteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка.
         /// </summary>
         internal static string StrError {

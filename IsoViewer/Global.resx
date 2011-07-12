@@ -195,4 +195,10 @@
 	<data name="IsoFileForm_Init_miSave_Text">
 		<value xml:space="preserve">Сохранить</value>
 	</data>
+	<data name="SaveIsoDialog_btSave_OverwriteMessage">
+		<value xml:space="preserve">Указанный файл уже существует. Заменить?</value>
+	</data>
+	<data name="SaveIsoDialog_btSave_OverwriteCaption">
+		<value xml:space="preserve">Подтверждение перезаписи</value>
+	</data>
 </root>

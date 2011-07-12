@@ -463,7 +463,7 @@ namespace Ps.Iso.Viewer {
       if (UnsavedChanges || _gridFields.WasEdited) if (MessageBox.Show(this,
         Global.IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges,
           Global.IsoFileForm_IsoFileForm_FormClosing_Warning,
-            MessageBoxButtons.YesNo) == DialogResult.No)
+            MessageBoxButtons.YesNo,MessageBoxIcon.Warning) == DialogResult.No)
               e.Cancel = true;
       else {
         CurrentIsoFile.Dispose();
