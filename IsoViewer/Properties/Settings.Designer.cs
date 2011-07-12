@@ -105,5 +105,29 @@ namespace Ps.Iso.Viewer.Properties {
                 this["EditOnEnter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("colNumber")]
+        public string gridFields_SortedColumn_Name {
+            get {
+                return ((string)(this["gridFields_SortedColumn_Name"]));
+            }
+            set {
+                this["gridFields_SortedColumn_Name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ascending")]
+        public global::System.ComponentModel.ListSortDirection gridFields_SortDirection {
+            get {
+                return ((global::System.ComponentModel.ListSortDirection)(this["gridFields_SortDirection"]));
+            }
+            set {
+                this["gridFields_SortDirection"] = value;
+            }
+        }
     }
 }

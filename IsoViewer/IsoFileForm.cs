@@ -392,6 +392,11 @@ namespace Ps.Iso.Viewer {
     private void IsoFileForm_FormClosing(
       object sender, FormClosingEventArgs e
     ) {
+      Settings.Default.gridFields_SortedColumn_Name =
+        _gridFields.gridFields.SortedColumn.Name;
+      Settings.Default.gridFields_SortDirection = _gridFields.gridFields.
+        SortOrder.ToSortDirection();
+      Settings.Default.Save();
       if (UnsavedChanges || _gridFields.WasEdited) if (MessageBox.Show(this,
         Global.IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges,
           Global.IsoFileForm_IsoFileForm_FormClosing_Warning,

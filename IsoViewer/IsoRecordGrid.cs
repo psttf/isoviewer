@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using System.Collections;
+using Ps.Iso.Viewer.Properties;
 
 namespace Ps.Iso.Viewer
 {
@@ -13,13 +14,23 @@ namespace Ps.Iso.Viewer
 
     public IsoRecordGrid() {
       InitializeComponent();
-      WasEdited = false;
+      Init();
     }
 
-    public IsoRecordGrid(IsoRecord record, List<int> highlightedFields) {
+	  public IsoRecordGrid(IsoRecord record, List<int> highlightedFields) {
       InitializeComponent();
       Record = record;
       HighlightFields(highlightedFields);
+      Init();
+    }
+
+    private void Init() {
+      var columnName = Settings.Default.gridFields_SortedColumn_Name;
+      var col = gridFields.Columns[columnName];
+      if (col == null)
+        throw new Exception(string.Format("Cannot sort on column '{0}' (taken" +
+          " from app settings): such a column does not exist", columnName));
+      gridFields.Sort(col, Settings.Default.gridFields_SortDirection);
       WasEdited = false;
     }
 

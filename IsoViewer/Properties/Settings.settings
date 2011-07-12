@@ -23,5 +23,11 @@
     <Setting Name="EditOnEnter" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="gridFields_SortedColumn_Name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">colNumber</Value>
+    </Setting>
+    <Setting Name="gridFields_SortDirection" Type="System.ComponentModel.ListSortDirection" Scope="User">
+      <Value Profile="(Default)">Ascending</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
