@@ -97,6 +97,141 @@ namespace Ps.Iso.Viewer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Проверить на ошибки....
+        /// </summary>
+        internal static string IsoFileForm__miCheckFile_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm__miCheckFile_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть ISO-файл.
+        /// </summary>
+        internal static string IsoFileForm_Init_btnOpenIsoFile_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_btnOpenIsoFile_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выход.
+        /// </summary>
+        internal static string IsoFileForm_Init_menuExit_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_menuExit_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to О программе.
+        /// </summary>
+        internal static string IsoFileForm_Init_miAbout_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miAbout_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Быстрое редактирование.
+        /// </summary>
+        internal static string IsoFileForm_Init_miEditOnEnter_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miEditOnEnter_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Справка.
+        /// </summary>
+        internal static string IsoFileForm_Init_miHelp_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miHelp_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        internal static string IsoFileForm_Init_miSave_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miSave_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить как....
+        /// </summary>
+        internal static string IsoFileForm_Init_miSaveAs_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miSaveAs_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить в формате RDF....
+        /// </summary>
+        internal static string IsoFileForm_Init_miSaveAsRdf_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miSaveAsRdf_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выбрать шрифт....
+        /// </summary>
+        internal static string IsoFileForm_Init_miSelectFont_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miSelectFont_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Просмотреть схему....
+        /// </summary>
+        internal static string IsoFileForm_Init_miShowScheme_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_miShowScheme_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открытие файла.
+        /// </summary>
+        internal static string IsoFileForm_Init_openFileDialog_Title {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_openFileDialog_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вид.
+        /// </summary>
+        internal static string IsoFileForm_Init_viewMenuItem_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_viewMenuItem_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кнопка &quot;Открыть ISO-файл&quot;.
+        /// </summary>
+        internal static string IsoFileForm_Init_Кнопка_miShowOpenIsoFileButton_Text {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_Кнопка_miShowOpenIsoFileButton_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to файлы ISO|*.iso|Все файлы|*.*.
+        /// </summary>
+        internal static string IsoFileForm_Init_файлы_ISO_openFileDialog_Filter {
+            get {
+                return ResourceManager.GetString("IsoFileForm_Init_файлы_ISO_openFileDialog_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Изменения не были сохранены. Вы действительно хотите выйти?.
         /// </summary>
         internal static string IsoFileForm_IsoFileForm_FormClosing_UnsavedChanges {

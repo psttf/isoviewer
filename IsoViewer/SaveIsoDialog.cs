@@ -55,17 +55,13 @@ namespace Ps.Iso.Viewer {
       );
     }
 
-    public Func<string, Action<Action<int>>> SaveTask { get; private set; }
-
     private void btSave_Click(object sender, EventArgs e) {
-      List<int> recNums;
       try {
         if (rbSaveAll.Checked) {
-          SaveTask =
-            filename => a => _isoFileForm.CurrentIsoFile.Save(filename, a);
+          SaveMethod = SaveMethod.All;
         } else if (!string.IsNullOrEmpty(tbRecordNumbers.Text)) {
           var strs = tbRecordNumbers.Text.Split(new[] { ',' });
-          recNums = new List<int>(strs.Length);
+          var recNums = new List<int>(strs.Length);
           foreach (
             var num in strs.Where(s => s.Trim() != "").
               Select(t => Convert.ToInt32(t) - 1)
@@ -77,16 +73,14 @@ namespace Ps.Iso.Viewer {
               throw new OverflowException();
             }
           }
+          RecordNumbers = recNums;
 
           if (string.IsNullOrEmpty(Filename)) {
             throw new Exception("¬ведите путь к файлу");
           }
 
-          if (rbSaveAllExceptSelected.Checked)
-            SaveTask = filename => a => _isoFileForm.CurrentIsoFile.
-              SaveExcept(filename, recNums, a);
-          else SaveTask = filename => a => _isoFileForm.CurrentIsoFile.
-            SaveOnly(filename, recNums, a);
+          SaveMethod = rbSaveAllExceptSelected.Checked ?
+            SaveMethod.Except : SaveMethod.Only;
         } else {
           Helper.ReportError("¬ведите хот€ бы один номер");
         }
@@ -105,5 +99,9 @@ namespace Ps.Iso.Viewer {
       get { return tbPath.Text; }
       set { tbPath.Text = value; }
     }
+
+    public SaveMethod SaveMethod { get; private set; }
+
+    public IList<int> RecordNumbers { get; private set; }
   }
 }

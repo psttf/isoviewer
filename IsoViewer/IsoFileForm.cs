@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Ps.Iso.Viewer.Properties;
 
@@ -387,7 +388,8 @@ namespace Ps.Iso.Viewer {
       var saveIsoDialog = new SaveIsoDialog(this);
       if (saveIsoDialog.ShowDialog() != DialogResult.OK) return;
 
-      ExecuteSaveTask(saveIsoDialog.SaveTask, saveIsoDialog.Filename);
+      ExecuteSaveTask(saveIsoDialog.SaveMethod,
+        saveIsoDialog.RecordNumbers, saveIsoDialog.Filename);
     }
 
     private void miSave_Click(object sender, EventArgs e) {
@@ -395,18 +397,43 @@ namespace Ps.Iso.Viewer {
       else
       {
         if (!EndEditAndRememberChanges()) return;
-        ExecuteSaveTask(filename => a => CurrentIsoFile.Save(filename, a),
-                        FileName);
+        ExecuteSaveTask(SaveMethod.All, null, FileName);
       }
     }
 
     private void ExecuteSaveTask(
-      Func<string,Action<Action<int>>> task,
-      string fileName
+      SaveMethod saveMethod,
+      IList<int> recordNumbers,
+      string filename
     ) {
-      new TaskProcessWindow(task(fileName), "Сохранение").ShowDialog();
+      var oldCurrentRecordIndex = _currentRecordIndex;
+      var oldRowIndex = _gridFields.gridFields.CurrentCell.RowIndex;
+      var oldColumn = _gridFields.gridFields.CurrentCell.OwningColumn.Name;
+      var newCurrentRecordIndex = -1;
+      Action<Action<int>> action = null;
+      switch (saveMethod) {
+        case SaveMethod.All:
+          action = a => CurrentIsoFile.Save(filename, a);
+          newCurrentRecordIndex = oldCurrentRecordIndex;
+          break;
+        case SaveMethod.Except:
+          action = a => CurrentIsoFile.SaveExcept(filename, recordNumbers, a);
+          newCurrentRecordIndex = oldCurrentRecordIndex -
+            recordNumbers.Where(n => n <= oldCurrentRecordIndex).Count();
+          break;
+        case SaveMethod.Only:
+          action = a => CurrentIsoFile.SaveOnly(filename, recordNumbers, a);
+          newCurrentRecordIndex =
+            recordNumbers.Contains(oldCurrentRecordIndex) ?
+              recordNumbers.Where(n => n < oldCurrentRecordIndex).Count() : 0;
+          break;
+      } 
+      new TaskProcessWindow(action, "Сохранение").ShowDialog();
       CurrentIsoFile.Dispose();
-      OpenFile(fileName);
+      OpenFile(filename);
+      GoToRecord(newCurrentRecordIndex);
+      _gridFields.gridFields.CurrentCell =
+        _gridFields.gridFields[oldColumn, oldRowIndex];
     }
 
     private void btnFirst_Click(object sender, EventArgs e) {
@@ -663,4 +690,6 @@ namespace Ps.Iso.Viewer {
    
     #endregion
   }
+
+  public enum SaveMethod { All, Except, Only }
 }
