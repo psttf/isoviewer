@@ -208,7 +208,7 @@ namespace Ps.Iso.Viewer
       // Ignore clicks that are not on button cells. 
       if (e.RowIndex < 0 || e.ColumnIndex != colExpand.Index) return;
       var cell = gridFields[colValue.Name, e.RowIndex];
-      var dlg = new EditValueDialog((string) cell.Value);
+      var dlg = new EditValueDialog((string) cell.Value) {Font = Font};
       if (dlg.ShowDialog() == DialogResult.OK) cell.Value = dlg.Value;
     }
 

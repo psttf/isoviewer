@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Ps.Iso.Viewer.Properties;
 
@@ -15,12 +16,12 @@ namespace Ps.Iso.Viewer {
     private ToolStripMenuItem _miCheckFile;
     private ToolStripMenuItem _miShowScheme;
     private ToolStripMenuItem _miSaveAs;
-    private ToolStripMenuItem _miSaveAsRdf;
+    //private ToolStripMenuItem _miSaveAsRdf;
 
     #region from MainForm
     private ToolStripMenuItem _miHelp;
     private ToolStripMenuItem _miAbout;
-    private MenuItem _menuExit;
+    private ToolStripMenuItem _menuExit;
     private ToolStripMenuItem _viewMenuItem;
     private ToolStripMenuItem _miSelectFont;
     private ToolStripMenuItem _miEditOnEnter;
@@ -63,10 +64,6 @@ namespace Ps.Iso.Viewer {
       }
       Height -= 20;
 
-      //_miShowOpenIsoFileButton.Checked = Settings.Default.tbOpenIsoFile_Visible;
-      //_tbOpenIsoFile.Visible = Settings.Default.tbOpenIsoFile_Visible;
-      _miEditOnEnter.Checked = Settings.Default.EditOnEnter;
-
       UnsavedChanges = false;
       Font = Settings.Default.Font;
       EditOnEnter = Settings.Default.EditOnEnter;
@@ -85,9 +82,9 @@ namespace Ps.Iso.Viewer {
       _miCheckFile = new ToolStripMenuItem();
       _miShowScheme = new ToolStripMenuItem();
       _miSaveAs = new ToolStripMenuItem();
-      _miSaveAsRdf = new ToolStripMenuItem();
+      //_miSaveAsRdf = new ToolStripMenuItem();
 
-      _menuExit = new MenuItem();
+      _menuExit = new ToolStripMenuItem();
       _viewMenuItem = new ToolStripMenuItem();
       _miSelectFont = new ToolStripMenuItem();
       //_miShowOpenIsoFileButton = new ToolStripMenuItem();
@@ -100,8 +97,15 @@ namespace Ps.Iso.Viewer {
   
       SuspendLayout();
 
-      fileToolStripMenuItem.DropDownItems.AddRange(new[] {
-        _miCheckFile, _miShowScheme, _miSaveAs, _miSaveAsRdf
+      //_miShowOpenIsoFileButton.Checked = Settings.Default.tbOpenIsoFile_Visible;
+      //_tbOpenIsoFile.Visible = Settings.Default.tbOpenIsoFile_Visible;
+      _miEditOnEnter.Checked = Settings.Default.EditOnEnter;
+
+      fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+        _miCheckFile, _miShowScheme, _miSaveAs,
+        //_miSaveAsRdf,
+        new ToolStripSeparator(),
+        _menuExit
       });
       // 
       // _miCheckFile
@@ -149,8 +153,7 @@ namespace Ps.Iso.Viewer {
       // 
       // _menuExit
       // 
-      _menuExit.Index = 3;
-      _menuExit.MergeOrder = 3;
+      _menuExit.MergeIndex = 3;
       _menuExit.Text = Global.IsoFileForm_Init_menuExit_Text;
       _menuExit.Click += menuExit_Click;
       // 
@@ -248,13 +251,13 @@ namespace Ps.Iso.Viewer {
     /// <param name="recNum">номер записи</param>
     private void GoToRecord(int recNum) {
       try {
-        var record = _isoFile.Records[recNum];
+        var record = CurrentIsoFile.Records[recNum];
         _gridFields.Record = record;
         _gridFields.HighlightFields(_highlightedFields);
 
         _currentRecordIndex = recNum;
         _tbCurRecNum.Text = (_currentRecordIndex + 1).ToString();
-        _btNext.Enabled = _currentRecordIndex != _isoFile.Records.Count - 1;
+        _btNext.Enabled = _currentRecordIndex != CurrentIsoFile.Records.Count - 1;
         _btPrev.Enabled = _currentRecordIndex != 0;
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
@@ -276,7 +279,7 @@ namespace Ps.Iso.Viewer {
       if (!_gridFields.WasEdited) return true;
       try {
         _gridFields.Record.Validate();
-        _isoFile.Records[_currentRecordIndex] = _gridFields.Record;
+        CurrentIsoFile.Records[_currentRecordIndex] = _gridFields.Record;
         UnsavedChanges = true;
         _gridFields.WasEdited = false;
         return true;
@@ -297,7 +300,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void GoToNext() {
-      if (_currentRecordIndex >= _isoFile.Records.Count - 1) return;
+      if (_currentRecordIndex >= CurrentIsoFile.Records.Count - 1) return;
       _highlightedFields = null;
       RememberChangesAndGoToRecord(_currentRecordIndex + 1);
     }
@@ -318,8 +321,8 @@ namespace Ps.Iso.Viewer {
         int newRecNum;
         if (val < 0) {
           newRecNum = 0;
-        } else if (val >= _isoFile.Records.Count) {
-          newRecNum = _isoFile.Records.Count - 1;
+        } else if (val >= CurrentIsoFile.Records.Count) {
+          newRecNum = CurrentIsoFile.Records.Count - 1;
         } else {
           newRecNum = val;
         }
@@ -335,7 +338,7 @@ namespace Ps.Iso.Viewer {
       _lvSearchResults.Items.Clear();
       List<Error> errors = null;
       var cff = new TaskProcessWindow(notifier =>
-        _searchResults = _isoFile.Search(_tbQuery.Text,
+        _searchResults = CurrentIsoFile.Search(_tbQuery.Text,
           _tbSearchKey.Text, out errors, notifier),
         "Поиск...");
       cff.ShowDialog();
@@ -359,7 +362,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void UpdateRecordCount() {
-      var cnt = _isoFile.Records.Count;
+      var cnt = CurrentIsoFile.Records.Count;
       _lblRecordCount.Text = cnt.ToString();
       _btDelete.Enabled = cnt > 1;
     }
@@ -383,7 +386,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void GoToEnd() {
-      RememberChangesAndGoToRecord(_isoFile.Records.Count - 1);
+      RememberChangesAndGoToRecord(CurrentIsoFile.Records.Count - 1);
     }
 
     private void IsoFileForm_FormClosing(
@@ -395,16 +398,16 @@ namespace Ps.Iso.Viewer {
             MessageBoxButtons.YesNo) == DialogResult.No)
               e.Cancel = true;
       else {
-        _isoFile.Dispose();
+        CurrentIsoFile.Dispose();
       } else {
-        _isoFile.Dispose();
+        CurrentIsoFile.Dispose();
       }
       MainForm_FormClosing();
     }
 
     private void miCheckFile_Click(object sender, EventArgs e) {
       IList<Error> errors = null;
-      var cff = new TaskProcessWindow(a => errors = _isoFile.Check(a),
+      var cff = new TaskProcessWindow(a => errors = CurrentIsoFile.Check(a),
         "Проверка файла на ошибки");
       cff.ShowDialog();
 
@@ -413,7 +416,7 @@ namespace Ps.Iso.Viewer {
     }
 
     private void miShowScheme_Click(object sender, EventArgs e) {
-      var dlg = new SchemeDailog(_isoFile);
+      var dlg = new SchemeDailog(CurrentIsoFile);
       dlg.Show();
     }
 
@@ -448,7 +451,7 @@ namespace Ps.Iso.Viewer {
 
     private void InsertNewRecordAt(int index) {
       if (!RememberChanges()) return;
-      _isoFile.Records.Insert(index, new IsoRecord());
+      CurrentIsoFile.Records.Insert(index, new IsoRecord());
       GoToRecord(index);
       _gridFields.EditNewRecord();
       UpdateRecordCount();
@@ -456,16 +459,18 @@ namespace Ps.Iso.Viewer {
     }
 
     private void _btDelete_Click(object sender, EventArgs e) {
-      _isoFile.Records.RemoveAt(_currentRecordIndex);
+      CurrentIsoFile.Records.RemoveAt(_currentRecordIndex);
       if (_currentRecordIndex > 0) RememberChangesAndGoToRecord(_currentRecordIndex - 1);
       else RememberChangesAndGoToRecord(_currentRecordIndex);
       UpdateRecordCount();
       UnsavedChanges = true;
     }
 
-    public override sealed System.Drawing.Font Font {
+    public override sealed Font Font {
       get { return base.Font; }
-      set { _gridFields.Font = value; }
+      set {
+        _gridFields.Font = value;
+      }
     }
 
     public bool EditOnEnter
@@ -478,7 +483,7 @@ namespace Ps.Iso.Viewer {
 
     public bool UnsavedChanges { get; set; }
 
-    public IsoFile CurrentIsoFile { get { return _isoFile; } }
+    public IsoFile CurrentIsoFile { get; private set; }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
@@ -533,7 +538,7 @@ namespace Ps.Iso.Viewer {
 
     public override void ProcessOpenedFile(string filename) {
       try {
-        _isoFile = IsoFile.Load(FileName);
+        CurrentIsoFile = IsoFile.Load(FileName);
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }
@@ -543,8 +548,8 @@ namespace Ps.Iso.Viewer {
 
     public override void InitNewFile() {
       try {
-        _isoFile = new IsoFile();
-        _isoFile.Records.Add(new IsoRecord());
+        CurrentIsoFile = new IsoFile();
+        CurrentIsoFile.Records.Add(new IsoRecord());
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }

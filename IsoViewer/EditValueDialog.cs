@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace Ps.Iso.Viewer
 {
@@ -17,6 +18,8 @@ namespace Ps.Iso.Viewer
       get { return _tbValue.Text; }
       set { _tbValue.Text = value; }
     }
+
+    public new Font Font { set { _tbValue.Font = value; } }
 
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
       switch (keyData) {
