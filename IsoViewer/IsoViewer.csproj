@@ -156,9 +156,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="comments\BUGS.txt" />
-    <Content Include="comments\NOTES.txt" />
-    <Content Include="comments\TODO.txt" />
+    <None Include="comments\BUGS.txt" />
+    <None Include="comments\NOTES.txt" />
+    <None Include="comments\TODO.txt" />
     <Content Include="App.ico" />
     <Content Include="dlls\BVINITI2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
