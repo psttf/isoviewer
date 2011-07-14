@@ -40,7 +40,7 @@ namespace Ps.Iso.Viewer
         fields.AddRange(
           from DataGridViewRow row in gridFields.ContentRows
           orderby GetFieldIndex(row)
-          select new IsoRecordField((string)row.Cells[ColKeyId].Value,
+          select new IsoRecordField((string)row.Cells[colKey.Index].Value,
             (string)row.Cells["colValue"].Value)
         );
         return new IsoRecord(fields);
@@ -69,21 +69,17 @@ namespace Ps.Iso.Viewer
 		{
       if (fieldNumbers == null) return;
 
-		  foreach (
-        var fieldNumber in fieldNumbers.
-          Where(fieldNumber => fieldNumber < gridFields.Rows.Count)
-      ) {
-		    gridFields.Rows[fieldNumber].DefaultCellStyle.BackColor
-		      = Color.LightSteelBlue;
-		  }
+		  var rowsToHighlight = gridFields.ContentRows.
+        Where(row => fieldNumbers.Contains(GetFieldIndex(row)));
+		  foreach (var row in rowsToHighlight)
+		    row.DefaultCellStyle.BackColor = Color.LightSteelBlue;
 
-      if (fieldNumbers.Count > 0)
-        gridFields.FirstDisplayedScrollingRowIndex = fieldNumbers[0];
+      if (rowsToHighlight.Count() > 0)
+        gridFields.FirstDisplayedScrollingRowIndex =
+          rowsToHighlight.First().Index;
     }
 
 		private bool _enableEdit;
-	  private const string ColKeyId = "colKey";
-	  public const string ColNumberId = "colNumber";
 
 		public bool EnableEdit
 		{
@@ -110,7 +106,7 @@ namespace Ps.Iso.Viewer
 			e.SortResult = Comparer.Default.Compare(e.CellValue1, e.CellValue2);
 
 			// If the cells are equal, sort based on the colNumber column.
-			if (e.SortResult == 0 && e.Column.Name != ColNumberId)
+			if (e.SortResult == 0 && e.Column != colNumber)
 			{
 				e.SortResult = GetFieldIndex(gridFields.Rows[e.RowIndex1])
           - GetFieldIndex(gridFields.Rows[e.RowIndex2]);
@@ -130,7 +126,7 @@ namespace Ps.Iso.Viewer
       object sender,
       DataGridViewRowEventArgs e
     ) {
-      SetFieldIndex(e.Row, gridFields.ContentRows.Count() + 1);
+      SetFieldIndex(e.Row, gridFields.ContentRows.Count());
     }
 
     private void gridFields_UserDeletedRow(
@@ -140,25 +136,25 @@ namespace Ps.Iso.Viewer
       var deletedIndex = GetFieldIndex(e.Row);
       foreach (var row in
         gridFields.Rows.Cast<DataGridViewRow>().
-        Where(row =>
-          row != gridFields.ContentRows &&
-            GetFieldIndex(row) > deletedIndex
-        )
+          Where(row =>
+            row.Cells[ColNumberIndex].Value != null &&
+              GetFieldIndex(row) > deletedIndex
+          )
       ) {
         SetFieldIndex(row, GetFieldIndex(row) - 1);
       }
     }
 
 // ReSharper disable PossibleNullReferenceException
-	  int ColNumberIndex { get { return gridFields.Columns[ColNumberId].Index; } }
+	  int ColNumberIndex { get { return colNumber.Index; } }
 // ReSharper restore PossibleNullReferenceException
 
     public int GetFieldIndex(DataGridViewRow r) {
-      return (int)r.Cells[ColNumberIndex].Value;
+      return (int)r.Cells[ColNumberIndex].Value - 1;
     }
 
     public void SetFieldIndex(DataGridViewRow r, int value) {
-      r.Cells[ColNumberIndex].Value = value;
+      r.Cells[ColNumberIndex].Value = value + 1;
     }
 
     internal void EditNewRecord() { BeginEditKey(gridFields.Rows[0]); }
@@ -169,7 +165,7 @@ namespace Ps.Iso.Viewer
     }
 
     private void BeginEditKey(DataGridViewRow row) {
-      gridFields.CurrentCell = row.Cells[ColKeyId];
+      gridFields.CurrentCell = row.Cells[colKey.Index];
       gridFields.BeginEdit(true);
 
       // иначе при создании новой записи она не считается отредактированной
@@ -191,10 +187,10 @@ namespace Ps.Iso.Viewer
       object sender, DataGridViewCellValidatingEventArgs e
     ) {
       var column = gridFields.Columns[e.ColumnIndex];
-      if (column.Name != ColKeyId) return;
+      if (column != colKey) return;
       var errorType = IsoRecord.ValidateFieldName((string) e.FormattedValue);
       if (!errorType.HasValue)
-        gridFields.Rows[e.RowIndex].Cells[ColKeyId].ErrorText = null;
+        gridFields.Rows[e.RowIndex].Cells[colKey.Index].ErrorText = null;
       if (errorType != null) MarkKeyCell(e.RowIndex, errorType.Value);
     }
 
@@ -213,7 +209,7 @@ namespace Ps.Iso.Viewer
           message = "Неверный формат имени поля";
           break;
       }
-      gridFields.Rows[rowIndex].Cells[ColKeyId].ErrorText = message;
+      gridFields.Rows[rowIndex].Cells[colKey.Index].ErrorText = message;
     }
 
     private void gridFields_CellClick(

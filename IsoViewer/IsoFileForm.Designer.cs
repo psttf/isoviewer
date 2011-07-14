@@ -11,7 +11,7 @@ namespace Ps.Iso.Viewer {
   partial class IsoFileForm {
     private IContainer components;
 
-    private SplitContainer _splitContainer1;
+    private SplitContainer _scFieldsSearchResults;
     private Panel _panel3;
     private TextBox _tbQuery;
     private Panel _panel5;
@@ -63,7 +63,7 @@ namespace Ps.Iso.Viewer {
       this.components = new System.ComponentModel.Container();
       Ps.Iso.IsoRecord isoRecord1 = new Ps.Iso.IsoRecord();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IsoFileForm));
-      this._splitContainer1 = new System.Windows.Forms.SplitContainer();
+      this._scFieldsSearchResults = new System.Windows.Forms.SplitContainer();
       this._gridFields = new Ps.Iso.Viewer.IsoRecordGrid();
       this._panel3 = new System.Windows.Forms.Panel();
       this._tbQuery = new System.Windows.Forms.TextBox();
@@ -93,10 +93,10 @@ namespace Ps.Iso.Viewer {
       this._panel6 = new System.Windows.Forms.Panel();
       this._label4 = new System.Windows.Forms.Label();
       this._toolTip = new System.Windows.Forms.ToolTip(this.components);
-      ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).BeginInit();
-      this._splitContainer1.Panel1.SuspendLayout();
-      this._splitContainer1.Panel2.SuspendLayout();
-      this._splitContainer1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this._scFieldsSearchResults)).BeginInit();
+      this._scFieldsSearchResults.Panel1.SuspendLayout();
+      this._scFieldsSearchResults.Panel2.SuspendLayout();
+      this._scFieldsSearchResults.SuspendLayout();
       this._panel3.SuspendLayout();
       this._panel5.SuspendLayout();
       this._panel2.SuspendLayout();
@@ -105,27 +105,27 @@ namespace Ps.Iso.Viewer {
       this._panel6.SuspendLayout();
       this.SuspendLayout();
       // 
-      // _splitContainer1
+      // _scFieldsSearchResults
       // 
-      this._splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-      this._splitContainer1.Location = new System.Drawing.Point(0, 25);
-      this._splitContainer1.Name = "_splitContainer1";
-      this._splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      this._scFieldsSearchResults.Dock = System.Windows.Forms.DockStyle.Fill;
+      this._scFieldsSearchResults.Location = new System.Drawing.Point(0, 25);
+      this._scFieldsSearchResults.Name = "_scFieldsSearchResults";
+      this._scFieldsSearchResults.Orientation = System.Windows.Forms.Orientation.Horizontal;
       // 
-      // _splitContainer1.Panel1
+      // _scFieldsSearchResults.Panel1
       // 
-      this._splitContainer1.Panel1.Controls.Add(this._gridFields);
-      this._splitContainer1.Panel1.Controls.Add(this._panel3);
-      this._splitContainer1.Panel1.Controls.Add(this._panel1);
+      this._scFieldsSearchResults.Panel1.Controls.Add(this._gridFields);
+      this._scFieldsSearchResults.Panel1.Controls.Add(this._panel3);
+      this._scFieldsSearchResults.Panel1.Controls.Add(this._panel1);
       // 
-      // _splitContainer1.Panel2
+      // _scFieldsSearchResults.Panel2
       // 
-      this._splitContainer1.Panel2.Controls.Add(this._panel7);
-      this._splitContainer1.Panel2.Controls.Add(this._panel6);
-      this._splitContainer1.Panel2Collapsed = true;
-      this._splitContainer1.Size = new System.Drawing.Size(692, 371);
-      this._splitContainer1.SplitterDistance = 25;
-      this._splitContainer1.TabIndex = 0;
+      this._scFieldsSearchResults.Panel2.Controls.Add(this._panel7);
+      this._scFieldsSearchResults.Panel2.Controls.Add(this._panel6);
+      this._scFieldsSearchResults.Panel2Collapsed = true;
+      this._scFieldsSearchResults.Size = new System.Drawing.Size(692, 371);
+      this._scFieldsSearchResults.SplitterDistance = 25;
+      this._scFieldsSearchResults.TabIndex = 0;
       // 
       // _gridFields
       // 
@@ -413,18 +413,18 @@ namespace Ps.Iso.Viewer {
       this.AcceptButton = this._btJump;
       this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
       this.ClientSize = new System.Drawing.Size(692, 396);
-      this.Controls.Add(this._splitContainer1);
+      this.Controls.Add(this._scFieldsSearchResults);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "IsoFileForm";
       this.Text = "ISO-файл";
       this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.IsoFileForm_FormClosing);
       this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IsoFileForm_KeyDown);
-      this.Controls.SetChildIndex(this._splitContainer1, 0);
-      this._splitContainer1.Panel1.ResumeLayout(false);
-      this._splitContainer1.Panel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).EndInit();
-      this._splitContainer1.ResumeLayout(false);
+      this.Controls.SetChildIndex(this._scFieldsSearchResults, 0);
+      this._scFieldsSearchResults.Panel1.ResumeLayout(false);
+      this._scFieldsSearchResults.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this._scFieldsSearchResults)).EndInit();
+      this._scFieldsSearchResults.ResumeLayout(false);
       this._panel3.ResumeLayout(false);
       this._panel3.PerformLayout();
       this._panel5.ResumeLayout(false);

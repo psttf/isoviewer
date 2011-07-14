@@ -12,7 +12,6 @@ namespace Ps.Iso.Viewer {
   public partial class IsoFileForm : IsoFileFormBase {
 
     private List<SearchResult> _searchResults;
-    private List<int> _highlightedFields;
 
     private ToolStripMenuItem _miCheckFile;
     private ToolStripMenuItem _miShowScheme;
@@ -40,6 +39,8 @@ namespace Ps.Iso.Viewer {
     /// Номер текущей записи (нумерация с 0)
     /// </summary>
     private int _currentRecordIndex;
+
+    private List<int> _lastHighlightedFields;
 
     public IsoFileForm() {
       //
@@ -252,7 +253,6 @@ namespace Ps.Iso.Viewer {
     {
       try {
         UpdateRecordCount();
-        _highlightedFields = null;
         RememberChangesAndGoToRecord(0);
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
@@ -264,11 +264,13 @@ namespace Ps.Iso.Viewer {
     /// Должен использоваться при каждой смене текущей записи
     /// </summary>
     /// <param name="recNum">номер записи</param>
-    private void GoToRecord(int recNum) {
+    /// <param name="highlightedFields">номера выделяемых записей</param>
+    private void GoToRecord(int recNum, List<int> highlightedFields = null) {
       try {
         var record = CurrentIsoFile.Records[recNum];
         _gridFields.Record = record;
-        _gridFields.HighlightFields(_highlightedFields);
+        _gridFields.HighlightFields(highlightedFields);
+        _lastHighlightedFields = highlightedFields;
 
         _currentRecordIndex = recNum;
         _tbCurRecNum.Text = (_currentRecordIndex + 1).ToString();
@@ -279,9 +281,11 @@ namespace Ps.Iso.Viewer {
       }
     }
 
-    private void RememberChangesAndGoToRecord(int recNum) {
+    private void RememberChangesAndGoToRecord(
+      int recNum, List<int> highlightedFields = null
+    ) {
       if (!RememberChanges()) return;
-      GoToRecord(recNum);
+      GoToRecord(recNum, highlightedFields);
     }
 
     /// <summary>
@@ -297,6 +301,10 @@ namespace Ps.Iso.Viewer {
         CurrentIsoFile.Records[_currentRecordIndex] = _gridFields.Record;
         UnsavedChanges = true;
         _gridFields.WasEdited = false;
+
+        _lvSearchResults.Items.Clear();
+        _scFieldsSearchResults.Panel2Collapsed = true;
+
         return true;
       } catch (EmptyFieldsException) {
         Helper.ReportError("Запись должна содержать хотя бы одно поле");
@@ -316,7 +324,6 @@ namespace Ps.Iso.Viewer {
 
     private void GoToNext() {
       if (_currentRecordIndex >= CurrentIsoFile.Records.Count - 1) return;
-      _highlightedFields = null;
       RememberChangesAndGoToRecord(_currentRecordIndex + 1);
     }
 
@@ -326,7 +333,6 @@ namespace Ps.Iso.Viewer {
 
     private void GoToPrevious() {
       if (_currentRecordIndex <= 0) return;
-      _highlightedFields = null;
       RememberChangesAndGoToRecord(_currentRecordIndex - 1);
     }
 
@@ -341,7 +347,6 @@ namespace Ps.Iso.Viewer {
         } else {
           newRecNum = val;
         }
-        _highlightedFields = null;
         RememberChangesAndGoToRecord(newRecNum);
       } catch {
         Helper.ReportError("Введите число!");
@@ -366,14 +371,15 @@ namespace Ps.Iso.Viewer {
           Add(new ListViewItem(new[] {(result.RecordNumber + 1).ToString(),
                                       result.FieldNumbers.Count.ToString()}));
       }
-      _splitContainer1.Panel2Collapsed = false;
+      _scFieldsSearchResults.Panel2Collapsed = false;
     }
 
-    private void lvSearchResults_ItemActivate(object sender, EventArgs e) {
-      _highlightedFields = _searchResults[_lvSearchResults.SelectedIndices[0]].
-        FieldNumbers;
-      RememberChangesAndGoToRecord(_searchResults[_lvSearchResults.SelectedIndices[0]].
-        RecordNumber);
+    private void lvSearchResults_ItemActivate(object sender, EventArgs e)
+    {
+      var selectedSearchResult =
+        _searchResults[_lvSearchResults.SelectedIndices[0]];
+      RememberChangesAndGoToRecord(selectedSearchResult.RecordNumber,
+        selectedSearchResult.FieldNumbers);
     }
 
     private void UpdateRecordCount() {
@@ -436,7 +442,7 @@ namespace Ps.Iso.Viewer {
       new TaskProcessWindow(action, "Сохранение").ShowDialog();
       CurrentIsoFile.Dispose();
       OpenFile(filename);
-      GoToRecord(newCurrentRecordIndex);
+      GoToRecord(newCurrentRecordIndex, _lastHighlightedFields);
       _gridFields.gridFields.CurrentCell =
         _gridFields.gridFields[oldColumn, oldRowIndex];
     }
