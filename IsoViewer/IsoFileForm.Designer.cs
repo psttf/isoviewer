@@ -124,7 +124,7 @@ namespace Ps.Iso.Viewer {
       this._scFieldsSearchResults.Panel2.Controls.Add(this._panel6);
       this._scFieldsSearchResults.Panel2Collapsed = true;
       this._scFieldsSearchResults.Size = new System.Drawing.Size(692, 371);
-      this._scFieldsSearchResults.SplitterDistance = 25;
+      this._scFieldsSearchResults.SplitterDistance = 200;
       this._scFieldsSearchResults.TabIndex = 0;
       // 
       // _gridFields

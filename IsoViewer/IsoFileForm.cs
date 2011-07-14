@@ -372,6 +372,7 @@ namespace Ps.Iso.Viewer {
           Add(new ListViewItem(new[] {(result.RecordNumber + 1).ToString(),
                                       result.FieldNumbers.Count.ToString()}));
       }
+      _scFieldsSearchResults.SplitterDistance = _scFieldsSearchResults.Height/2;
       _scFieldsSearchResults.Panel2Collapsed = false;
     }
 
