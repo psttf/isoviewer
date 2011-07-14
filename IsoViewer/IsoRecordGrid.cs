@@ -143,6 +143,7 @@ namespace Ps.Iso.Viewer
       ) {
         SetFieldIndex(row, GetFieldIndex(row) - 1);
       }
+      WasEdited = true;
     }
 
 // ReSharper disable PossibleNullReferenceException
