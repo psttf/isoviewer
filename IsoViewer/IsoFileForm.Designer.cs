@@ -137,6 +137,7 @@ namespace Ps.Iso.Viewer {
       this._gridFields.Size = new System.Drawing.Size(692, 317);
       this._gridFields.TabIndex = 22;
       this._gridFields.WasEdited = false;
+      this._gridFields.WasEditedEvent += new System.EventHandler(this._gridFields_WasEditedEvent);
       // 
       // _panel3
       // 

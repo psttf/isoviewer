@@ -269,8 +269,7 @@ namespace Ps.Iso.Viewer {
       try {
         var record = CurrentIsoFile.Records[recNum];
         _gridFields.Record = record;
-        _gridFields.HighlightFields(highlightedFields);
-        _lastHighlightedFields = highlightedFields;
+        HighlightFieldsAndRemember(highlightedFields);
 
         _currentRecordIndex = recNum;
         _tbCurRecNum.Text = (_currentRecordIndex + 1).ToString();
@@ -279,6 +278,12 @@ namespace Ps.Iso.Viewer {
       } catch (Exception exception) {
         Helper.ReportError(exception.Message);
       }
+    }
+
+    private void HighlightFieldsAndRemember(List<int> highlightedFields)
+    {
+      _gridFields.HighlightFields(highlightedFields);
+      _lastHighlightedFields = highlightedFields;
     }
 
     private void RememberChangesAndGoToRecord(
@@ -301,10 +306,6 @@ namespace Ps.Iso.Viewer {
         CurrentIsoFile.Records[_currentRecordIndex] = _gridFields.Record;
         UnsavedChanges = true;
         _gridFields.WasEdited = false;
-
-        _lvSearchResults.Items.Clear();
-        _scFieldsSearchResults.Panel2Collapsed = true;
-
         return true;
       } catch (EmptyFieldsException) {
         Helper.ReportError("Запись должна содержать хотя бы одно поле");
@@ -715,6 +716,12 @@ namespace Ps.Iso.Viewer {
 
     private static int MoveRespectingOpenForms(int i) {
       return i + 20 * IvApplication.CurrentApplication.OpenForms.Count;
+    }
+
+    private void _gridFields_WasEditedEvent(object sender, EventArgs e) {
+      _lvSearchResults.Items.Clear();
+      _scFieldsSearchResults.Panel2Collapsed = true;
+      HighlightFieldsAndRemember(null);
     }
   }
 

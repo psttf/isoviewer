@@ -10,9 +10,25 @@ using Ps.Iso.Viewer.Properties;
 namespace Ps.Iso.Viewer
 {
 	public partial class IsoRecordGrid : UserControl {
-	  public bool WasEdited { get; set; }
+    public event EventHandler WasEditedEvent;
 
-    public IsoRecordGrid() {
+	  public void InvokeWasEditedEvent(EventArgs e)
+	  {
+	    var handler = WasEditedEvent;
+	    if (handler != null) handler(this, e);
+	  }
+
+	  private bool _wasEdited;
+	  public bool WasEdited
+	  {
+	    get { return _wasEdited; }
+	    set {
+        if (value) InvokeWasEditedEvent(new EventArgs());
+	      _wasEdited = value;
+	    }
+	  }
+
+	  public IsoRecordGrid() {
       InitializeComponent();
       Init();
     }
@@ -65,18 +81,19 @@ namespace Ps.Iso.Viewer
       }
     }
 
-		public void HighlightFields(List<int> fieldNumbers)
-		{
-      if (fieldNumbers == null) return;
+		public void HighlightFields(List<int> fieldNumbers) {
+      if (fieldNumbers == null) fieldNumbers = new List<int>();
+		  DataGridViewRow firstHighlightedRow = null;
 
-		  var rowsToHighlight = gridFields.ContentRows.
-        Where(row => fieldNumbers.Contains(GetFieldIndex(row)));
-		  foreach (var row in rowsToHighlight)
-		    row.DefaultCellStyle.BackColor = Color.LightSteelBlue;
+		  foreach (var row in gridFields.ContentRows) {
+		    if (fieldNumbers.Contains(GetFieldIndex(row))) {
+		      if (firstHighlightedRow == null) firstHighlightedRow = row;
+          row.DefaultCellStyle.BackColor = Color.LightSteelBlue;
+        } else row.DefaultCellStyle.BackColor = SystemColors.Window;
+		  }
 
-      if (rowsToHighlight.Count() > 0)
-        gridFields.FirstDisplayedScrollingRowIndex =
-          rowsToHighlight.First().Index;
+      if (firstHighlightedRow != null)
+        gridFields.FirstDisplayedScrollingRowIndex = firstHighlightedRow.Index;
     }
 
 		private bool _enableEdit;
