@@ -500,7 +500,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISO Viewer"
         "ProductCode" = "8:{DBCF97A8-0BC0-4389-84C3-62478FFC7E47}"
-        "PackageCode" = "8:{627C8D6B-CD92-49D4-8546-3244B898B00F}"
+        "PackageCode" = "8:{8203ED1E-DACA-4B59-BB59-0EEEAAFDC302}"
         "UpgradeCode" = "8:{91D00F57-EB7A-4867-9843-1D020BF29E86}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
